@@ -7,3 +7,5 @@ dist/
 .DS_Store
 # material en bruto: fotos y videos originales, borradores
 _material/
+.vercel
+.env*

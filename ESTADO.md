@@ -6,7 +6,7 @@
 - F0 en curso: proyecto Astro creado, look Nebulosa aplicado, portada en mosaico con fotos reales y las seis secciones como páginas «en construcción».
 - `npm run build` genera 7 páginas sin errores. Verificado en navegador (escritorio y 390 px): sin errores de consola, sin scroll lateral, la navegación con transiciones funciona.
 - Pendiente para cerrar F0: push a GitHub, despliegue en Vercel y dominio `claudio.noisezero.dev` respondiendo con HTTPS.
-- Producción en Vercel: https://senal-six.vercel.app (proyecto `senal`, despliegue automático desde `main` de cherrerag/senal). `claudio.noisezero.dev` ya está agregado en Vercel; falta el registro DNS en Cloudflare (A `claudio` → 76.76.21.21, sin proxy).
+- Producción en Vercel: https://senal-six.vercel.app (proyecto `senal`, despliegue automático desde `main` de cherrerag/senal). Dominio https://claudio.noisezero.dev en línea con HTTPS (CNAME `claudio` → cname.vercel-dns.com en Cloudflare, sin proxy). F0 cerrada.
 
 ## Siguiente
 - F1 · Portada: pulir el mosaico, transiciones entre bloques y secciones, medir el desenfoque en teléfono.

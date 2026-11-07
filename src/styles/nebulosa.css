@@ -105,3 +105,58 @@ img { max-width: 100%; display: block; }
   :root { --blur: 8px; }
   body { font-size: 17px; }
 }
+
+/* ——— Interior · Revista (D-05 A): piezas compartidas por todas las secciones ——— */
+.cabecera { display: grid; gap: 18px; padding-top: 24px; max-width: 980px; }
+.cabecera h1 { font-size: clamp(44px, 7vw, 96px); line-height: 0.98; letter-spacing: -0.02em; }
+.cabecera h1 em { font-style: normal; color: var(--accent); }
+.lead { font-size: clamp(19px, 2vw, 23px); line-height: 1.5; color: var(--fg-2); max-width: 62ch; }
+.lead strong { color: var(--fg); font-weight: 500; }
+
+.sec { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 24px 48px; }
+.sec-k { display: grid; align-content: start; gap: 10px; position: sticky; top: 96px; }
+.sec-k .num { font-family: var(--display); font-size: 44px; line-height: 1; color: var(--accent); }
+.sec-c { display: grid; gap: 28px; min-width: 0; }
+.sec-c > h2, .sec h2 { font-size: clamp(30px, 3.6vw, 48px); line-height: 1.05; letter-spacing: -0.01em; }
+.sec-c > h2 em { font-style: normal; color: var(--accent); }
+
+.prosa { display: grid; gap: 1em; max-width: 68ch; color: var(--fg); }
+.prosa p { color: color-mix(in srgb, var(--fg) 88%, var(--fg-2)); }
+.prosa strong { font-weight: 500; color: var(--fg); }
+.prosa em { font-style: italic; }
+.prosa a { color: var(--accent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+
+.cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.cifra { padding: 18px 18px 16px; display: grid; gap: 6px; }
+.cifra b { font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1; letter-spacing: -0.01em; }
+.cifra span { color: var(--fg-2); font-size: 14.5px; line-height: 1.35; }
+
+.fig { margin: 0; display: grid; gap: 10px; }
+.fig picture, .fig .marco { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #0d0a18; }
+.fig img { width: 100%; height: 100%; object-fit: cover; }
+.fig figcaption { font-family: var(--mono); font-size: 12px; color: var(--fg-2); letter-spacing: 0.02em; }
+.galeria { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; align-items: start; }
+.galeria .fig { grid-column: span 2; }
+.galeria .fig.ancha { grid-column: span 4; }
+.galeria .fig.media { grid-column: span 3; }
+.galeria .fig picture { aspect-ratio: 4 / 3; }
+.galeria .fig.alta picture { aspect-ratio: 4 / 5; }
+
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.tarjeta { padding: 22px; display: grid; gap: 10px; align-content: start; }
+.tarjeta h3 { font-size: 24px; line-height: 1.12; }
+.tarjeta p { color: var(--fg-2); font-size: 16px; }
+
+.boton { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-size: 15px; transition: background 0.2s, color 0.2s; }
+.boton:hover { background: var(--accent); color: var(--on-accent); }
+.siguiente { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 22px; }
+.siguiente h3 { font-size: 28px; }
+
+@media (max-width: 900px) {
+  .sec { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .sec-k { position: static; grid-auto-flow: column; justify-content: start; align-items: baseline; gap: 14px; }
+  .sec-k .num { font-size: 32px; }
+  .galeria { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .galeria .fig, .galeria .fig.media { grid-column: span 1; }
+  .galeria .fig.ancha { grid-column: span 2; }
+}

@@ -1,0 +1,59 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import { getCollection, render } from "astro:content";
+export async function getStaticPaths() {
+  const ensayos = (await getCollection("ensayos")).sort((a, b) => a.data.orden - b.data.orden);
+  return ensayos.map((e, i) => ({ params: { slug: e.id }, props: { e, otro: ensayos[(i + 1) % ensayos.length] } }));
+}
+const { e, otro } = Astro.props;
+const { Content, headings } = await render(e);
+const secciones = headings.filter((h) => h.depth === 2);
+---
+<Revista title={e.data.titulo} description={e.data.pregunta}>
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/ensayos">← Ensayos</a>
+    <span class="eyebrow">{e.data.serie} · idea {e.data.numero} · junio 2026 · escrito con {e.data.coautor}</span>
+    <h1><span class="romano" transition:name={`romano-${e.id}`}>{e.data.numero}</span> {e.data.titulo}</h1>
+    <p class="lead">{e.data.pregunta}</p>
+  </header>
+
+  <div class="lectura">
+    <aside class="toc">
+      <span class="eyebrow">En este ensayo</span>
+      <ol>{secciones.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+    </aside>
+    <article class="texto">
+      {e.data.nota && <p class="nota vidrio"><span class="mono">nota ›</span> {e.data.nota}</p>}
+      <Content />
+    </article>
+  </div>
+
+  <a class="siguiente vidrio" href={`/ensayos/${otro.id}`}><div><span class="eyebrow">Otra idea · {otro.data.numero}</span><h3>{otro.data.titulo}</h3></div><span class="boton">Leer →</span></a>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .romano { color: var(--accent); }
+  .lectura { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 48px; }
+  .toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 12px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+  .toc a { color: var(--fg-2); }
+  .toc a:hover { color: var(--accent); }
+  .texto { max-width: 68ch; font-size: 19px; line-height: 1.7; }
+  .texto :global(h2) { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.1; margin: 2em 0 0.6em; scroll-margin-top: 96px; }
+  .texto :global(h2:first-of-type) { margin-top: 0.4em; }
+  .texto :global(h3) { font-size: 25px; margin: 1.6em 0 0.4em; color: var(--accent); scroll-margin-top: 96px; }
+  .texto :global(p) { margin: 0 0 1.1em; color: color-mix(in srgb, var(--fg) 90%, var(--fg-2)); }
+  .texto :global(blockquote) { margin: 1.6em 0; padding: 4px 0 4px 22px; border-left: 2px solid var(--accent); font-family: var(--display); font-size: 24px; line-height: 1.35; }
+  .texto :global(blockquote p) { color: var(--fg); }
+  .texto :global(ul), .texto :global(ol) { padding-left: 1.2em; margin: 0 0 1.2em; color: var(--fg-2); }
+  .texto :global(li) { margin-bottom: 0.5em; }
+  .texto :global(strong) { font-weight: 500; color: var(--fg); }
+  .nota { padding: 16px 18px; font-size: 16px; line-height: 1.55; color: var(--fg-2); margin-bottom: 2em; }
+  .nota .mono { color: var(--accent); }
+  @media (max-width: 900px) {
+    .lectura { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .toc { position: static; }
+    .texto { font-size: 18px; }
+  }
+</style>

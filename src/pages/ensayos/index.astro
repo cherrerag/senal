@@ -1,0 +1,76 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import { getCollection } from "astro:content";
+import prologoTxt from "../../data/prologo.txt?raw";
+const ensayos = (await getCollection("ensayos")).sort((a, b) => a.data.orden - b.data.orden);
+const publicados = new Set(ensayos.map((e) => e.data.numero));
+const prologo = prologoTxt.split("\n").map((l) => l.trim()).filter(Boolean).slice(1);
+const indice = [
+  ["I", "La física de la información"], ["II", "La crisis del yo extendido"], ["III", "Biología sintética como nueva escritura"],
+  ["IV", "El colapso de la distinción entre herramienta y agente"], ["V", "La economía de la abundancia y sus contradicciones"],
+  ["VI", "Ecología del conocimiento y epistemología colectiva"], ["VII", "Fenomenología de la IA"],
+  ["VIII", "Longevidad radical y sus fracturas éticas"], ["IX", "El problema de la alineación como pregunta filosófica genuina"],
+  ["X", "Narrativa, ficción y construcción de realidad"],
+];
+const slugDe = (n: string) => ensayos.find((e) => e.data.numero === n)?.id;
+---
+<Revista title="Ensayos" description="10 ideas críticas del pensamiento más vivo de este tiempo, escritas con Claude. Publicadas las dos primeras: la física de la información y la fenomenología de la IA.">
+  <header class="cabecera" transition:name="t-ensayos">
+    <span class="eyebrow">Ensayos · 10 ideas críticas · junio 2026</span>
+    <h1>Sostener preguntas difíciles <em>con curiosidad.</em></h1>
+    <p class="lead">Una lectura integradora para tiempos de transición, escrita en conversación con Claude. Son diez ideas; publico dos para empezar y las demás irán llegando.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Publicados</span></div>
+    <div class="sec-c">
+      <div class="ensayos">
+        {ensayos.map((e) => (
+          <a class="ensayo vidrio aparece" href={`/ensayos/${e.id}`}>
+            <span class="romano" transition:name={`romano-${e.id}`}>{e.data.numero}</span>
+            <div>
+              <h2>{e.data.titulo}</h2>
+              <p>{e.data.pregunta}</p>
+              <span class="mono muted">Leer →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">00</span><span class="eyebrow">Prólogo</span></div>
+    <div class="sec-c">
+      <h2>Por qué estas ideas importan ahora.</h2>
+      <div class="prosa">{prologo.map((p) => <p>{p}</p>)}</div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">10</span><span class="eyebrow">Índice</span></div>
+    <div class="sec-c">
+      <ol class="indice">
+        {indice.map(([n, t]) => publicados.has(n)
+          ? <li class="si"><span class="mono">{n}</span><a href={`/ensayos/${slugDe(n)}`}>{t}</a></li>
+          : <li><span class="mono">{n}</span><span>{t}</span><span class="mono muted pronto">pronto</span></li>)}
+      </ol>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .ensayos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .ensayo { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; padding: 26px; transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s; }
+  .ensayo:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .romano { font-family: var(--display); font-size: 64px; line-height: 0.9; color: var(--accent); min-width: 1.2em; }
+  .ensayo h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.08; }
+  .ensayo p { color: var(--fg-2); margin: 10px 0 14px; font-size: 17px; }
+  .indice { list-style: none; margin: 0; padding: 0; display: grid; }
+  .indice li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; padding-block: 12px; border-top: 1px solid var(--line); color: var(--fg-2); align-items: baseline; }
+  .indice .mono { color: var(--fg-2); }
+  .indice .si, .indice .si .mono { color: var(--accent); }
+  .indice .si a { color: var(--fg); border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); width: fit-content; }
+  .pronto { font-size: 11px; }
+  @media (max-width: 760px) { .ensayos { grid-template-columns: minmax(0, 1fr); } .romano { font-size: 48px; } .ensayo { padding: 20px; } }
+</style>

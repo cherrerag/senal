@@ -1,0 +1,92 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
+const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabación íntima", "contrabajo al frente, domingo en la mañana", "voces de mujer, poca producción"];
+---
+<Revista title="Cava Musical" image="/fotos/cava-muro.webp" description="Caso de estudio: catálogo curado de 5.087 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala de escucha.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
+    <span class="eyebrow">Caso de estudio · abril → octubre 2026 · en producción</span>
+    <h1>Cava <em>Musical</em></h1>
+    <p class="lead">Una cava como la de vinos, pero de discos: <strong>5.087 álbumes</strong> elegidos por cómo suenan, con un sommelier que entiende lo que le pides en palabras y un botón que manda el disco directo a la sala.</p>
+  </header>
+
+  <Foto n="cava-muro" eager class="portada" alt="Muro de carátulas de álbumes en la galería de la Cava Musical" pie="La galería: carátulas oficiales en alta resolución." />
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
+    <div class="sec-c prosa">
+      <h2>Miles de discos, ninguna forma de encontrarlos.</h2>
+      <p>Las plataformas de streaming ordenan la música por popularidad y por lo que escuchaste ayer. Yo quería lo contrario: una colección curada por calidad de grabación, donde pudiera buscar por sensación, timbre o momento del día, y no solo por artista.</p>
+      <p>Empezó como una base de datos en Notion y unos scripts. Creció hasta romperse: tres migraciones del catálogo y fallas cada vez que alguien renombraba un campo en la interfaz.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Qué construí</span></div>
+    <div class="sec-c">
+      <h2>Catálogo, sommelier y control de sala.</h2>
+      <div class="cifras">
+        <div class="cifra vidrio"><b>5.087</b><span>álbumes curados</span></div>
+        <div class="cifra vidrio"><b>99,5%</b><span>con carátula oficial en 1280 px</span></div>
+        <div class="cifra vidrio"><b>1.536</b><span>dimensiones por álbum en el índice semántico</span></div>
+        <div class="cifra vidrio"><b>&lt;500</b><span>ms de respuesta en la galería</span></div>
+      </div>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio"><span class="eyebrow">Catálogo</span><h3>PostgreSQL, no Notion</h3><p>Cada álbum con sello, año, calidad del máster y notas de cata. Desde el 12 de septiembre Notion ya no está en la ruta crítica.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Sommelier IA</span><h3>Búsqueda por sensación</h3><p>Cada álbum tiene un vector que describe cómo suena. La búsqueda encuentra lo que se parece a lo que pediste, y un veto de timbre evita saltos absurdos entre un cuarteto acústico y algo estridente.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Consola de sala</span><h3>Del teléfono a los parlantes</h3><p>Un reproductor fijo en la parte inferior manda el disco al streamer de <a href="/proyectos/noise-zero">Noise Zero</a>, muestra el nivel sonoro de la sala en vivo y elige la escena de luz.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">App instalable</span><h3>PWA en iOS y Android</h3><p>Se instala como app, guarda carátulas en caché y nunca guarda en caché lo que viene del hardware.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">03</span><span class="eyebrow">Cómo se busca</span></div>
+    <div class="sec-c">
+      <h2>Pedir música <em>como se pide un vino.</em></h2>
+      <div class="consultas" aria-label="Ejemplos de consultas al sommelier">
+        {ejemplos.map((e, i) => <p class="consulta vidrio aparece" style={`--i:${i}`}><span class="mono muted">sommelier ›</span> {e}</p>)}
+      </div>
+      <div class="prosa">
+        <p>Detrás hay tres pasos: un modelo de lenguaje describe cada álbum por su timbre, instrumentos y atmósfera; esa descripción se convierte en un vector y se guarda junto al disco; y cada consulta se compara contra los 5.087 vectores con un índice que responde en milisegundos. El mismo motor alimenta las recomendaciones de cada álbum y un explorador por perillas de ánimo.</p>
+      </div>
+      <Foto n="acustica" class="media" alt="Pantalla del kiosco de la sala con perfiles de ecualización por género" pie="Lo que elige la Cava llega al kiosco de la sala con su perfil de ecualización." />
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">04</span><span class="eyebrow">Lo que salió mal</span></div>
+    <div class="sec-c">
+      <h2>Una herramienta sin esquema no es una base de datos.</h2>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Notion como base</span><h3>Tres migraciones</h3><p>Renombrar un campo en la interfaz rompía todo lo que dependía de él. La lección: un solo punto de verdad por integración, con un esquema que no se pueda cambiar por accidente.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Cuatro scripts para lo mismo</span><h3>Copiar en vez de compartir</h3><p>Cada proyecto tenía su propio cargador de Notion y su propio inicio de sesión en TIDAL. Ahora la Cava es la fuente única del catálogo y la sala la consume.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">«El build pasó»</span><h3>Compiló y la pantalla quedó vacía</h3><p>La IA asumió la forma de una API sin consultarla. Desde entonces, toda especificación que consume una API exige una prueba de contrato ejecutada.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">05</span><span class="eyebrow">Resultado</span></div>
+    <div class="sec-c">
+      <h2>En producción, de uso privado.</h2>
+      <div class="prosa">
+        <p>La Cava corre en Vercel con su propio dominio y la uso todos los días. No la enlazo aquí porque controla una sala real: el que tiene la Cava abierta tiene el volumen en la mano.</p>
+        <p><strong>Lo que sigue:</strong> <span>Music Map</span>, la constelación de afinidades entre artistas, se alimenta del mismo catálogo y vuelve en la segunda ola.</p>
+      </div>
+      <div class="chips"><span class="chip">Next.js 16</span><span class="chip">Supabase · PostgreSQL</span><span class="chip">pgvector · HNSW</span><span class="chip">Tailwind 4</span><span class="chip">Vercel</span><span class="chip">53 commits</span></div>
+      <a class="siguiente vidrio" href="/bitacora"><div><span class="eyebrow">Cómo llegué aquí</span><h3>La bitácora de 2026</h3></div><span class="boton">Leer →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .portada :global(picture) { aspect-ratio: 1230 / 330; }
+  .consultas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .consulta { padding: 16px 18px; font-family: var(--display); font-size: 21px; line-height: 1.25; }
+  .consulta .mono { display: block; font-size: 11.5px; margin-bottom: 6px; }
+  .tarjeta a { color: var(--accent); }
+  @media (max-width: 700px) { .portada :global(picture) { aspect-ratio: 16 / 9; } }
+</style>

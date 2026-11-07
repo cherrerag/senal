@@ -1,0 +1,43 @@
+---
+import Revista from "../layouts/Revista.astro";
+import { enciclopedias } from "../data/sitio";
+---
+<Revista title="Biblioteca" description="Enciclopedias escritas con IA: astrofísica, exploración espacial, comunicaciones, historia de Chile e ingeniería de transmisión de datos.">
+  <header class="cabecera" transition:name="t-biblioteca">
+    <span class="eyebrow">Biblioteca · enciclopedias</span>
+    <h1>Aprender en serio, <em>por escrito.</em></h1>
+    <p class="lead">Cuando un tema me importa, no me basta con leer sobre él: lo ordeno en una enciclopedia, con capítulos, fórmulas y fuentes. Las escribo con IA usando el mismo método que los proyectos: estructura antes que texto, y nada se da por terminado sin revisarlo.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">0{enciclopedias.length}</span><span class="eyebrow">Obras</span></div>
+    <div class="sec-c">
+      <ol class="estante">
+        {enciclopedias.map((e, i) => (
+          <li class="vidrio aparece" style={`--h:${i}`}>
+            <div class="lomo" aria-hidden="true"><span>{e.area}</span></div>
+            <div class="ficha">
+              <span class="eyebrow">{e.area}</span>
+              <h2>{e.titulo}</h2>
+              <p>{e.detalle}</p>
+              <span class="mono estado">{e.estado}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="mono muted">Los sitios de lectura se abren en esta biblioteca a medida que se publican. Las obras se basan en fuentes públicas; los textos de terceros no se reproducen.</p>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .estante { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .estante li { display: grid; grid-template-columns: 64px minmax(0, 1fr); overflow: hidden; }
+  .lomo { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) calc(40% - var(--h) * 6%), transparent), color-mix(in srgb, #ff5caa calc(10% + var(--h) * 6%), transparent)); display: grid; place-items: center; border-right: 1px solid var(--line); }
+  .lomo span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg); }
+  .ficha { padding: 24px; display: grid; gap: 10px; }
+  .ficha h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.08; }
+  .ficha p { color: var(--fg-2); max-width: 64ch; }
+  .estado { color: var(--accent); }
+  @media (max-width: 600px) { .estante li { grid-template-columns: 40px minmax(0, 1fr); } .ficha { padding: 18px; } }
+</style>

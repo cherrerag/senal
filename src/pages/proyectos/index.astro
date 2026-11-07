@@ -1,0 +1,71 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
+import { proyectos } from "../../data/sitio";
+const ola1 = proyectos.filter((p) => p.ola === 1);
+const ola2 = proyectos.filter((p) => p.ola === 2);
+const total = proyectos.reduce((s, p) => s + p.commits, 0);
+---
+<Revista title="Proyectos" description="Sistemas reales construidos con agentes de IA: Noise Zero, Cava Musical, COCKPIT, Second Brain y Music Map.">
+  <header class="cabecera" transition:name="t-proyectos">
+    <span class="eyebrow">Proyectos · abril → noviembre 2026</span>
+    <h1>Problemas propios, <em>resueltos</em> en serio.</h1>
+    <p class="lead">No empecé con un plan de carrera. Quería un catálogo de música hi-fi, una sala de escucha que reaccionara al sonido y un sistema para no perder el hilo de todo lo anterior. Cada proyecto se cuenta igual: el problema, lo que construí, cómo se conecta, lo que salió mal y lo que decidí.</p>
+    <div class="cifras">
+      <div class="cifra vidrio"><b>{proyectos.length}</b><span>sistemas</span></div>
+      <div class="cifra vidrio"><b>{total}</b><span>commits entre los cinco</span></div>
+      <div class="cifra vidrio"><b>3</b><span>en producción</span></div>
+    </div>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">Casos de estudio</span></div>
+    <div class="sec-c">
+      <div class="casos">
+        {ola1.map((p) => (
+          <a class="caso vidrio aparece" href={`/proyectos/${p.slug}`}>
+            {p.foto && <Foto n={p.foto} alt="" class="caso-foto" pos={p.foto === "sala" ? "50% 45%" : "50% 50%"} />}
+            <div class="caso-t">
+              <div class="k"><span class="eyebrow">{p.estado} · {p.periodo}</span><span class="go" aria-hidden="true">↗</span></div>
+              <h2>{p.nombre}</h2>
+              <p>{p.resumen}</p>
+              <div class="chips">{p.stack.map((s) => <span class="chip">{s}</span>)}<span class="chip">{p.commits} commits</span></div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Segunda ola</span></div>
+    <div class="sec-c">
+      <h2>Las herramientas que sostienen a las otras.</h2>
+      <p class="lead">Sus casos se escriben en la segunda ola. Por ahora, qué son y en qué estado están.</p>
+      <div class="tarjetas">
+        {ola2.map((p) => (
+          <article class="tarjeta vidrio aparece">
+            <span class="eyebrow">{p.estado} · {p.periodo}</span>
+            <h3>{p.nombre}</h3>
+            <p>{p.resumen}</p>
+            <div class="chips">{p.stack.map((s) => <span class="chip">{s}</span>)}<span class="chip">{p.commits} commits</span></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .casos { display: grid; gap: 16px; }
+  .caso { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 0; overflow: hidden; transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s; }
+  .caso:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .caso :global(.caso-foto picture) { border: 0; border-radius: 0; height: 100%; aspect-ratio: 4 / 3; }
+  .caso-t { padding: 26px; display: grid; gap: 14px; align-content: center; }
+  .caso-t h2 { font-size: clamp(34px, 4vw, 52px); }
+  .caso-t p { color: var(--fg-2); }
+  .k { display: flex; justify-content: space-between; gap: 12px; }
+  .go { color: var(--accent); transition: transform 0.3s; }
+  .caso:hover .go { transform: translate(3px, -3px); }
+  @media (max-width: 760px) { .caso { grid-template-columns: minmax(0, 1fr); } .caso-t { padding: 20px; } }
+</style>

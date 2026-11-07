@@ -1,0 +1,77 @@
+---
+import Revista from "../layouts/Revista.astro";
+import { principios, antipatrones } from "../data/sitio";
+const implicancias = [
+  ["La definición de terminado es la palanca de calidad.", "Con un equipo humano, un buen desarrollador compensa una historia mal escrita. Un agente no: ejecuta exactamente lo especificado y cierra en cuanto puede."],
+  ["El PO diseña el contexto, no solo el backlog.", "Archivos de estado, contratos y decisiones registradas son lo que permite que un agente trabaje bien. Es documentación de producto con otro lector."],
+  ["Verificar es parte del rol.", "Exigir evidencia ejecutada, no reportes de avance, deja de ser tarea de QA y pasa a ser criterio de aceptación diario."],
+  ["El foco es el recurso escaso.", "Con ejecución barata, la tentación es abrir proyectos sin límite. Gestionar el WIP y saber congelar importa más que nunca."],
+  ["Validar con software real, no con maquetas.", "La distancia entre una idea y un prototipo funcional bajó de semanas a sesiones."],
+];
+---
+<Revista title="Método" description="Siete principios y nueve antipatrones de seis meses dirigiendo agentes de IA como un equipo de desarrollo.">
+  <header class="cabecera" transition:name="t-metodo">
+    <span class="eyebrow">Método · escrito el 24 de octubre de 2026</span>
+    <h1>La IA es un ejecutor excelente y un <em>verificador perezoso.</em></h1>
+    <p class="lead">Cuando la IA abarata la ejecución, el cuello de botella se mueve a <strong>decidir qué construir, especificarlo bien y verificar que funciona</strong>. Ese es el trabajo de un Product Owner. Estas son las reglas que sobrevivieron al uso diario en todos los proyectos.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">07</span><span class="eyebrow">Principios</span></div>
+    <div class="sec-c">
+      <ol class="principios">
+        {principios.map((p, i) => (
+          <li class="aparece"><span class="n">{String(i + 1).padStart(2, "0")}</span><div><h2>{p.t}</h2><p>{p.d}</p></div></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">09</span><span class="eyebrow">Antipatrones</span></div>
+    <div class="sec-c">
+      <h2>Lo que salió mal, y la regla que dejó.</h2>
+      <div class="anti">
+        {antipatrones.map((a) => (
+          <article class="tarjeta vidrio aparece">
+            <h3>{a.a}</h3>
+            <p>{a.p}</p>
+            <p class="regla"><span class="mono">regla ›</span> {a.r}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">05</span><span class="eyebrow">Para el rol de PO</span></div>
+    <div class="sec-c">
+      <h2>La IA no reemplaza al Product Owner. <em>Le cambia el centro de gravedad.</em></h2>
+      <dl class="impl">
+        {implicancias.map(([t, d]) => <div class="aparece"><dt>{t}</dt><dd>{d}</dd></div>)}
+      </dl>
+      <p class="lead">La pregunta abierta que me interesa: cómo se ven estos principios en un equipo de telecomunicaciones real, donde el contexto es más grande, regulado y compartido entre muchas personas.</p>
+      <a class="siguiente vidrio" href="/proyectos/noise-zero"><div><span class="eyebrow">El método en práctica</span><h3>Noise Zero</h3></div><span class="boton">Ver el caso →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .principios { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: p; }
+  .principios li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 20px; padding-block: 26px; border-top: 1px solid var(--line); }
+  .principios .n { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 10px; }
+  .principios h2 { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.08; }
+  .principios p { color: var(--fg-2); margin-top: 8px; max-width: 60ch; }
+  .anti { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+  .regla { color: var(--fg) !important; padding-top: 10px; border-top: 1px solid var(--line); }
+  .regla .mono { color: var(--accent); }
+  .impl { margin: 0; display: grid; gap: 0; }
+  .impl div { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; padding-block: 18px; border-top: 1px solid var(--line); }
+  .impl dt { font-family: var(--display); font-size: 22px; line-height: 1.2; }
+  .impl dd { margin: 0; color: var(--fg-2); }
+  @media (max-width: 760px) {
+    .principios li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .principios .n { padding-top: 0; }
+    .impl div { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  }
+</style>

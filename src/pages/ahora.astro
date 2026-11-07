@@ -1,0 +1,45 @@
+---
+import Revista from "../layouts/Revista.astro";
+const foco = [
+  { e: "Construyendo", t: "Este sitio", d: "Señal salió en línea el 7 de noviembre. Ahora le doy cuerpo: casos de estudio, bitácora, ensayos y biblioteca." },
+  { e: "Escribiendo", t: "Comunicaciones Espaciales y Redes Interplanetarias", d: "El tomo III de la serie del espacio: telemetría, espacio profundo y redes tolerantes a demoras." },
+  { e: "Usando todos los días", t: "COCKPIT v2", d: "Centro de mando con una sola fuente de tareas, máximo dos críticas en ejecución y cierre de sesión asistido." },
+];
+const pausa = [
+  { t: "Noise Zero", d: "En producción y en pausa: la sala corre sola." },
+  { t: "Cava Musical", d: "En producción y en pausa: la uso, no la amplío." },
+  { t: "Music Map", d: "Pausado hasta la segunda ola." },
+];
+---
+<Revista title="Ahora" description="En qué estoy trabajando ahora, qué está en pausa y por qué.">
+  <header class="cabecera" transition:name="t-ahora">
+    <span class="eyebrow">Ahora · actualizado el 7 de noviembre de 2026</span>
+    <h1>En qué estoy, <em>y en qué no.</em></h1>
+    <p class="lead">Pausar también es una decisión de producto. Trabajo con un límite estricto: <strong>dos tareas críticas a la vez</strong>, y las ideas nuevas esperan siete días antes de recibir un documento de requisitos.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">En curso</span></div>
+    <div class="sec-c">
+      <div class="tarjetas">
+        {foco.map((f) => <article class="tarjeta vidrio aparece"><span class="eyebrow">{f.e}</span><h3>{f.t}</h3><p>{f.d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">En pausa</span></div>
+    <div class="sec-c">
+      <ul class="pausa">{pausa.map((p) => <li><b>{p.t}</b><span>{p.d}</span></li>)}</ul>
+      <p class="mono muted">Esta página sigue la idea de las páginas «now»: una foto del foco actual, fechada.</p>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .pausa { list-style: none; margin: 0; padding: 0; display: grid; }
+  .pausa li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 20px; padding-block: 16px; border-top: 1px solid var(--line); }
+  .pausa b { font-family: var(--display); font-weight: 400; font-size: 24px; }
+  .pausa span { color: var(--fg-2); }
+  @media (max-width: 700px) { .pausa li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+</style>

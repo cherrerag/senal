@@ -1,0 +1,174 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
+---
+<Revista title="Noise Zero" image="/fotos/sala.webp" description="Caso de estudio: una sala de escucha hi-fi que se mide a sí misma, corrige el ecualizador y compone la luz con 480 LEDs.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
+    <span class="eyebrow">Caso de estudio · abril → octubre 2026 · en producción</span>
+    <h1>Noise <em>Zero</em></h1>
+    <p class="lead">Una sala de escucha de 5 × 4 metros que <strong>se escucha a sí misma</strong>: mide con un micrófono, corrige lo que puede con el ecualizador del streamer y compone la luz que acompaña a la música. Sin ser ingeniero acústico y sin llenar el living de paneles.</p>
+  </header>
+
+  <Foto n="sala" eager class="portada" pos="50% 42%" alt="La sala de escucha de noche: tornamesa, streamer y amplificador en un rack negro, con un parlante de piso iluminado de azul" pie="La sala. Rack con tornamesa, streamer WiiM Ultra y amplificador Hegel H95; parlantes Q Acoustics 3050i." />
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
+    <div class="sec-c prosa">
+      <h2>Buen equipo, sala sin medir.</h2>
+      <p>Una sala de living nunca suena como la diseñó el fabricante de los parlantes. Los graves se acumulan en las esquinas, algunas frecuencias rebotan y otras desaparecen. La solución clásica son paneles, trampas de graves y un técnico con un micrófono de medición. Yo quería otra cosa: que la sala se midiera sola, que el ecualizador se ajustara a lo que suena y que la luz siguiera a la música en vez de competir con ella.</p>
+      <p>Era también la prueba de fuego de trabajar con IA: hardware real, cables reales, un sistema que tiene que encender solo después de un corte de luz.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Qué construí</span></div>
+    <div class="sec-c">
+      <h2>Tres piezas que conversan.</h2>
+      <div class="cifras">
+        <div class="cifra vidrio"><b>480</b><span>LEDs direccionables WS2812B</span></div>
+        <div class="cifra vidrio"><b>24</b><span>perfiles de ecualización por nombre</span></div>
+        <div class="cifra vidrio"><b>171</b><span>commits</span></div>
+        <div class="cifra vidrio"><b>12</b><span>decisiones registradas (ADR)</span></div>
+      </div>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio"><span class="eyebrow">Borde · ESP32-S3</span><h3>Centinela acústico y motor de luz</h3><p>Un micrófono I²S ICS-43434 escucha la sala y una tira de 480 LEDs dibuja el ambiente. Habla con el orquestador por WebSocket sobre WiFi.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Orquestador · Raspberry Pi 4</span><h3>FastAPI y kiosco táctil</h3><p>Analiza lo que llega del micrófono, controla el ecualizador del streamer y sirve un kiosco React en una pantalla de 5". Tres servicios de systemd que sobreviven a un corte de luz.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Fuente · WiiM Ultra</span><h3>Streamer y ecualizador</h3><p>Reproduce TIDAL y radios en línea, y aplica el perfil de ecualización que pide el orquestador.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">03</span><span class="eyebrow">Cómo se conecta</span></div>
+    <div class="sec-c">
+      <h2>El recorrido de una canción.</h2>
+      <div class="recorrido" data-recorrido>
+        <figure class="diagrama vidrio" data-paso="1" aria-label="Diagrama de la arquitectura de Noise Zero">
+          <svg viewBox="0 0 520 420" role="img" aria-labelledby="dg-t">
+            <title id="dg-t">Micrófono y LEDs en el ESP32-S3, conectado por WebSocket a la Raspberry Pi; la Raspberry controla el WiiM Ultra, que alimenta al amplificador y los parlantes; la Cava llega por un túnel.</title>
+            <defs><marker id="pt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor" /></marker></defs>
+            <g class="n n1"><rect x="20" y="30" width="200" height="86" rx="12" /><text x="38" y="62" class="t">ESP32-S3</text><text x="38" y="86" class="s">micrófono ICS-43434</text><text x="38" y="104" class="s">480 LEDs WS2812B</text></g>
+            <g class="n n2"><rect x="300" y="150" width="200" height="104" rx="12" /><text x="318" y="182" class="t">Raspberry Pi 4</text><text x="318" y="206" class="s">FastAPI · analizador</text><text x="318" y="224" class="s">kiosco React 5"</text><text x="318" y="242" class="s">systemd · autónoma</text></g>
+            <g class="n n3"><rect x="20" y="290" width="200" height="86" rx="12" /><text x="38" y="322" class="t">WiiM Ultra</text><text x="38" y="346" class="s">streamer · 24 perfiles EQ</text><text x="38" y="364" class="s">→ Hegel H95 → 3050i</text></g>
+            <g class="n n4"><rect x="300" y="30" width="200" height="70" rx="12" /><text x="318" y="60" class="t">Cava Musical</text><text x="318" y="82" class="s">Vercel · por túnel</text></g>
+            <g class="a a1"><path d="M220 80 C 270 90, 300 140, 320 150" marker-end="url(#pt)" /><text x="236" y="122" class="s">WebSocket</text></g>
+            <g class="a a2"><path d="M300 230 C 250 250, 230 300, 222 315" marker-end="url(#pt)" /><text x="248" y="290" class="s">EQ por nombre</text></g>
+            <g class="a a3"><path d="M330 150 C 300 120, 260 100, 222 96" marker-end="url(#pt)" /></g>
+            <g class="a a4"><path d="M400 100 L 400 148" marker-end="url(#pt)" /></g>
+          </svg>
+        </figure>
+        <ol class="pasos">
+          <li data-p="1"><span class="eyebrow">1 · escuchar</span><p>El ESP32 mide la presión sonora de la sala varias veces por segundo y la envía por WebSocket. El 30 de agosto el contador marcaba casi doce millones de cuadros recibidos.</p></li>
+          <li data-p="2"><span class="eyebrow">2 · decidir</span><p>En la Raspberry, FastAPI recibe la medición, sabe qué disco está sonando y elige el perfil de ecualización que le corresponde: por su nombre, nunca por número.</p></li>
+          <li data-p="3"><span class="eyebrow">3 · corregir y alumbrar</span><p>El WiiM aplica el perfil y el orquestador devuelve al ESP32 la escena de luz: color y movimiento según el género y la energía de la música.</p></li>
+          <li data-p="4"><span class="eyebrow">4 · elegir el disco</span><p>Desde el teléfono, la Cava Musical manda el álbum a la sala a través de un túnel cifrado. La sala no expone nada más hacia afuera.</p></li>
+        </ol>
+      </div>
+      <div class="galeria">
+        <Foto n="kiosco" class="media" alt="Pantalla táctil del kiosco con el logo Noise Zero y la medición de nivel sonoro en vivo" pie="El kiosco en reposo, con el nivel sonoro en vivo." />
+        <Foto n="acustica" class="media" alt="Pantalla del kiosco con la lista de perfiles de ecualización: Jazz, Deep House, Acoustic, Night Mode" pie="Perfiles de ecualización en el kiosco." />
+        <Foto n="radios" class="media" alt="Pantalla del kiosco con una lista de radios en línea" pie="Rediseño del kiosco: radios, vinilos, luz manual y Cava por artista." />
+        <Foto n="luz" class="media alta" alt="Escritorio de trabajo con una tira de luz LED encendida bajo la cubierta" pie="La tira de luz en el banco de pruebas." />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">04</span><span class="eyebrow">Lo que salió mal</span></div>
+    <div class="sec-c">
+      <h2>Los errores que <em>cambiaron</em> el método.</h2>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Documentos que mentían</span><h3>«Cero deuda técnica»</h3><p>Los documentos declaraban el proyecto limpio mientras la función principal estaba rota. Nadie la había ejecutado. Desde julio, los documentos son el estado y se actualizan en el mismo commit que los invalida.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Una suposición de meses</span><h3>Presets que no eran ecualizaciones</h3><p>El proyecto asumió durante meses que los presets 1 a 12 del streamer eran ecualizaciones. Eran accesos directos a contenido de TIDAL. Ahora el ecualizador se controla por nombre.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Firmware desde cero</span><h3>Reescribirlo todo a la vez</h3><p>Rehacer el firmware del ESP32 con audio y 480 LEDs al mismo tiempo se trabó en el hardware. Se descartó: se parte del firmware de referencia que funciona y se aplican cambios pequeños y verificados.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Seis días a ciegas</span><h3>La pantalla que nadie miraba</h3><p>El kiosco espera su interfaz en un puerto fijo antes de encender, y el rack no tiene teclado. Un cambio en ese puerto dejó la pantalla muerta seis días. Lo nuevo se agrega al lado, nunca encima.</p></article>
+      </div>
+      <div class="galeria">
+        <Foto n="esquema" class="alta" alt="Cuaderno cuadriculado con el esquema a mano del circuito y la lista de componentes" pie="El circuito, primero en papel." />
+        <Foto n="esp32" class="alta" alt="ESP32 en una protoboard con cables de colores sobre un tapete con mapa del mundo" pie="Prototipo en protoboard." />
+        <Foto n="pcb" class="alta" alt="Placa perforada con el ESP32 soldado y sus conectores" pie="La placa definitiva." />
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">05</span><span class="eyebrow">Decisiones</span></div>
+    <div class="sec-c">
+      <h2>Doce decisiones escritas.</h2>
+      <p class="lead">Cada alternativa descartada o difícil de revertir tiene su registro. Cinco de ellas definieron el sistema:</p>
+      <ol class="adr">
+        <li><span class="mono">ADR-0005</span><div><b>El Mac como orquestador interino.</b> <span>Anulada: la Raspberry quedó autónoma y el Mac volvió a ser solo estación de trabajo.</span></div></li>
+        <li><span class="mono">ADR-0007</span><div><b>Ecualizador por nombre.</b> <span>Los perfiles se piden por su nombre; los números del aparato significan otra cosa.</span></div></li>
+        <li><span class="mono">ADR-0010</span><div><b>WebSocket sobre WiFi para el ESP32.</b> <span>Se descartó la conexión serial por cable.</span></div></li>
+        <li><span class="mono">ADR-0011</span><div><b>Firmware sobre la referencia.</b> <span>Se descartó escribirlo desde cero; se versionan los parches.</span></div></li>
+        <li><span class="mono">ADR-0012</span><div><b>La Cava como fuente única del catálogo.</b> <span>La sala dejó de leer Notion y consume el catálogo de la Cava.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">06</span><span class="eyebrow">Resultado</span></div>
+    <div class="sec-c">
+      <h2>La sala corre sola.</h2>
+      <div class="prosa">
+        <p>Desde el 30 de agosto la Raspberry arranca sola, incluso después de un corte de luz, con una dirección fija verificada con un reinicio real. El ESP32 está integrado y la sala se escucha de verdad. El proyecto está en producción y en pausa: funciona todos los días mientras el foco está en otras cosas.</p>
+        <p><strong>Lo que sigue:</strong> los servicios en la nube que analizan la sala con un modelo de lenguaje están diseñados y esperan su turno en la hoja de ruta.</p>
+      </div>
+      <div class="galeria">
+        <Foto n="raspberry" class="alta" alt="Raspberry Pi 4 con disipador montada detrás de la pantalla del kiosco, sobre el cuaderno con el esquema" pie="La Raspberry Pi detrás del kiosco." />
+        <Foto n="cables" class="alta" alt="Cables y la tira de luz en color turquesa detrás del rack" pie="Detrás del rack." />
+        <Foto n="escritorio" class="alta" alt="Estación de trabajo con monitores y un notebook" pie="Donde se escribió todo." pos="50% 40%" />
+      </div>
+      <a class="siguiente vidrio" href="/proyectos/cava-musical"><div><span class="eyebrow">Siguiente caso</span><h3>Cava Musical</h3></div><span class="boton">Leer →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<script>
+  function recorrido() {
+    const caja = document.querySelector<HTMLElement>("[data-recorrido]");
+    if (!caja) return;
+    const fig = caja.querySelector<HTMLElement>(".diagrama")!;
+    const pasos = caja.querySelectorAll<HTMLElement>("[data-p]");
+    const io = new IntersectionObserver((es) => {
+      for (const e of es) if (e.isIntersecting) {
+        fig.dataset.paso = (e.target as HTMLElement).dataset.p!;
+        pasos.forEach((p) => p.classList.toggle("activo", p === e.target));
+      }
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    pasos.forEach((p) => io.observe(p));
+  }
+  document.addEventListener("astro:page-load", recorrido);
+</script>
+
+<style>
+  .volver { color: var(--accent); }
+  .portada :global(picture) { aspect-ratio: 16 / 9; }
+  .recorrido { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 32px; align-items: start; }
+  .diagrama { position: sticky; top: 96px; margin: 0; padding: 16px; color: var(--fg-2); }
+  .diagrama svg { width: 100%; height: auto; display: block; }
+  .n rect { fill: rgba(255, 255, 255, 0.04); stroke: var(--line); stroke-width: 1.2; transition: stroke 0.4s, fill 0.4s; }
+  .t { font-family: var(--display); font-size: 21px; fill: var(--fg); }
+  .s { font-family: var(--mono); font-size: 11.5px; fill: var(--fg-2); }
+  .a path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 4 5; transition: color 0.4s; }
+  .a { color: rgba(255, 255, 255, 0.28); }
+  [data-paso="1"] .n1 rect, [data-paso="2"] .n2 rect, [data-paso="3"] .n3 rect, [data-paso="3"] .n1 rect, [data-paso="4"] .n4 rect, [data-paso="4"] .n2 rect { stroke: var(--accent); fill: color-mix(in srgb, var(--accent) 10%, transparent); }
+  [data-paso="1"] .a1, [data-paso="2"] .a2, [data-paso="3"] .a3, [data-paso="3"] .a2, [data-paso="4"] .a4 { color: var(--accent); }
+  .pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 22vh; padding-block: 8vh 14vh; }
+  .pasos li { display: grid; gap: 8px; padding-left: 16px; border-left: 2px solid var(--line); opacity: 0.45; transition: opacity 0.4s, border-color 0.4s; }
+  .pasos li.activo { opacity: 1; border-color: var(--accent); }
+  .pasos p { font-size: 19px; }
+  .adr { list-style: none; margin: 0; padding: 0; display: grid; }
+  .adr li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding-block: 16px; border-top: 1px solid var(--line); }
+  .adr .mono { color: var(--accent); padding-top: 3px; }
+  .adr b { font-weight: 500; }
+  .adr span:not(.mono) { color: var(--fg-2); }
+  @media (max-width: 900px) {
+    .recorrido { grid-template-columns: minmax(0, 1fr); }
+    .diagrama { top: 104px; z-index: 2; background: color-mix(in srgb, var(--bg) 82%, transparent); }
+    .pasos { gap: 34vh; padding-block: 4vh 30vh; }
+    .adr li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pasos li { opacity: 1; } }
+</style>

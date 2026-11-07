@@ -1,0 +1,18 @@
+---
+/* Foto producida (D-10): versión 700 px para móvil, versión grande para escritorio. */
+const dims: Record<string, [number, number]> = {
+  acustica: [940, 640], cables: [1200, 1500], "cava-muro": [1230, 330], escritorio: [1400, 1050],
+  esp32: [1200, 1500], esquema: [1200, 1500], kiosco: [1400, 1050], luz: [1200, 1500],
+  pcb: [1200, 1500], radios: [1400, 1050], raspberry: [1200, 1500], sala: [1200, 1500],
+};
+interface Props { n: string; alt: string; pie?: string; class?: string; eager?: boolean; pos?: string }
+const { n, alt, pie, class: clase, eager = false, pos = "50% 50%" } = Astro.props;
+const [w, h] = dims[n] ?? [1200, 900];
+---
+<figure class:list={["fig", clase]}>
+  <picture>
+    <source media="(max-width: 700px)" srcset={`/fotos/${n}-700.webp`} />
+    <img src={`/fotos/${n}.webp`} alt={alt} width={w} height={h} loading={eager ? "eager" : "lazy"} decoding="async" style={`object-position:${pos}`} />
+  </picture>
+  {pie && <figcaption>{pie}</figcaption>}
+</figure>

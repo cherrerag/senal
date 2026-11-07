@@ -1,0 +1,23 @@
+---
+import Base from "./Base.astro";
+import Header from "../components/Header.astro";
+interface Props { title: string; description?: string; image?: string }
+const { title, description, image } = Astro.props;
+---
+<Base title={`${title} · Claudio Herrera`} description={description} image={image}>
+  <Header />
+  <main class="contenedor revista">
+    <slot />
+  </main>
+  <footer class="contenedor pie mono muted">
+    <span>claudio herrera · señal</span>
+    <a href="/">← portada</a>
+  </footer>
+</Base>
+
+<style>
+  .revista { padding-block: 48px 96px; display: grid; gap: 96px; }
+  .pie { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 24px 40px; border-top: 1px solid var(--line); font-size: 12px; position: relative; z-index: 1; }
+  .pie a { color: var(--accent); }
+  @media (max-width: 700px) { .revista { gap: 72px; padding-block: 32px 72px; } }
+</style>

@@ -1,22 +1,26 @@
 ---
 import Base from "../layouts/Base.astro";
 import Signal from "../components/Signal.astro";
-import { hitos } from "../data/sitio";
+import { hitos, nav } from "../data/sitio";
+const cortos: Record<string, string> = { "2026-03-18": "Primer proyecto", "2026-04-09": "Noise Zero", "2026-07-25": "La suscripción", "2026-09-12": "Cava en PostgreSQL", "2026-11-07": "Señal en línea" };
+const mini = hitos.filter((h) => h.fecha in cortos);
+const meses = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const corta = (iso: string) => `${+iso.slice(8)} ${meses[+iso.slice(5, 7) - 1]}`;
 ---
 <Base>
   <div class="contenedor">
     <header class="top">
       <a class="logo" href="/">Claudio <em>Herrera</em></a>
-      <span class="mono muted">Santiago · noviembre 2026</span>
+      <nav class="nav-top" aria-label="Secciones">{nav.map((n) => <a href={n.href}>{n.nombre}</a>)}</nav>
     </header>
 
     <section class="intro">
       <h1>Construyo sistemas reales con <em>agentes</em> de IA.</h1>
-      <span class="mono muted">6 sistemas · 456 commits · 3 en producción</span>
+      <span class="mono muted">Santiago · 6 sistemas · 456 commits · 3 en producción</span>
     </section>
 
     <main class="mosaico">
-      <a class="tile vidrio t-nz aparece" href="/proyectos" transition:name="t-proyectos">
+      <a class="tile vidrio t-nz aparece" href="/proyectos/noise-zero">
         <div class="k"><span class="eyebrow">Proyecto · en producción</span><span class="go" aria-hidden="true">↗</span></div>
         <picture class="foto">
           <source media="(max-width: 700px)" srcset="/fotos/sala-700.webp" />
@@ -29,7 +33,7 @@ import { hitos } from "../data/sitio";
 
       <div class="tile vidrio t-sig aparece"><Signal label="ruido → señal" /></div>
 
-      <a class="tile vidrio t-cava aparece" href="/proyectos">
+      <a class="tile vidrio t-cava aparece" href="/proyectos/cava-musical">
         <div class="k"><span class="eyebrow">Proyecto · en producción</span><span class="go" aria-hidden="true">↗</span></div>
         <span class="big">5.087</span>
         <h3>Cava Musical</h3>
@@ -46,8 +50,8 @@ import { hitos } from "../data/sitio";
         <div class="k"><span class="eyebrow">Bitácora</span><span class="go" aria-hidden="true">↗</span></div>
         <h3>Dos cambios en 2026</h3>
         <ol class="mini-tl">
-          {hitos.map((h) => (
-            <li class={h.cambio ? "cambio" : ""}><span class="mono">{h.fecha.slice(5)}</span>{h.titulo}</li>
+          {mini.map((h) => (
+            <li class={h.cambio ? "cambio" : ""}><span class="mono">{corta(h.fecha)}</span>{cortos[h.fecha]}</li>
           ))}
         </ol>
       </a>
@@ -81,6 +85,9 @@ import { hitos } from "../data/sitio";
   .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 24px; flex-wrap: wrap; }
   .logo { font-family: var(--display); font-size: 24px; letter-spacing: -0.01em; }
   .logo em { font-style: normal; color: var(--accent); }
+  .nav-top { display: flex; gap: 18px; flex-wrap: wrap; font-size: 15px; }
+  .nav-top a { color: var(--fg-2); transition: color 0.2s; }
+  .nav-top a:hover { color: var(--fg); }
   .intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; padding-block: 28px 32px; }
   .intro h1 { font-size: clamp(42px, 6vw, 90px); line-height: 0.98; letter-spacing: -0.02em; }
   .intro h1 em { font-style: normal; color: var(--accent); }

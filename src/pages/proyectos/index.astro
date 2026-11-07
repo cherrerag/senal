@@ -24,7 +24,7 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
       <div class="casos">
         {ola1.map((p) => (
           <a class="caso vidrio aparece" href={`/proyectos/${p.slug}`}>
-            {p.foto && <Foto n={p.foto} alt="" class="caso-foto" pos={p.foto === "sala" ? "50% 45%" : "50% 50%"} />}
+            {p.foto ? <Foto n={p.foto} alt="" class="caso-foto" pos={p.foto === "sala" ? "50% 45%" : "50% 50%"} /> : <div class="caso-arte" aria-hidden="true"><span>WIP ≤ 2</span></div>}
             <div class="caso-t">
               <div class="k"><span class="eyebrow">{p.estado} · {p.periodo}</span><span class="go" aria-hidden="true">↗</span></div>
               <h2>{p.nombre}</h2>
@@ -38,10 +38,10 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
   </section>
 
   <section class="sec">
-    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Segunda ola</span></div>
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">En camino</span></div>
     <div class="sec-c">
       <h2>Las herramientas que sostienen a las otras.</h2>
-      <p class="lead">Sus casos se escriben en la segunda ola. Por ahora, qué son y en qué estado están.</p>
+      <p class="lead">Sus casos vienen después. Por ahora, qué son y en qué estado están.</p>
       <div class="tarjetas">
         {ola2.map((p) => (
           <article class="tarjeta vidrio aparece">
@@ -64,6 +64,8 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
   .caso-t { padding: 26px; display: grid; gap: 14px; align-content: center; }
   .caso-t h2 { font-size: clamp(34px, 4vw, 52px); }
   .caso-t p { color: var(--fg-2); }
+  .caso-arte { min-height: 260px; display: grid; place-items: center; background: radial-gradient(60% 70% at 30% 30%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%), radial-gradient(50% 60% at 80% 80%, var(--nube-turquesa), transparent 70%), #0d0a18; }
+  .caso-arte span { font-family: var(--display); font-size: clamp(40px, 6vw, 72px); color: var(--fg); }
   .k { display: flex; justify-content: space-between; gap: 12px; }
   .go { color: var(--accent); transition: transform 0.3s; }
   .caso:hover .go { transform: translate(3px, -3px); }

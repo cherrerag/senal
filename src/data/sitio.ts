@@ -25,7 +25,7 @@ export type Proyecto = {
 export const proyectos: Proyecto[] = [
   { slug: "noise-zero", nombre: "Noise Zero", resumen: "Una sala de escucha hi-fi que se escucha a sí misma, corrige el ecualizador y compone la luz con 480 LEDs.", stack: ["ESP32-S3", "Raspberry Pi", "FastAPI", "React", "WiiM"], commits: 171, periodo: "abr → oct 2026", estado: "En producción", foto: "sala", ola: 1 },
   { slug: "cava-musical", nombre: "Cava Musical", resumen: "Catálogo curado de 5.087 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala.", stack: ["Next.js", "Supabase", "pgvector", "Vercel"], commits: 53, periodo: "abr → oct 2026", estado: "En producción", foto: "cava-muro", ola: 1 },
-  { nombre: "COCKPIT", resumen: "Centro de mando personal: tareas, WIP estricto, salud de proyectos y coach de IA.", stack: ["Next.js", "Supabase", "Gemini"], commits: 62, periodo: "abr → oct 2026", estado: "En producción", ola: 2 },
+  { slug: "cockpit", nombre: "COCKPIT", resumen: "Mi centro de mando: una sola fuente de tareas, máximo dos críticas a la vez y un radar de todos los repositorios.", stack: ["Next.js", "Supabase", "Gemini", "PWA"], commits: 62, periodo: "abr → oct 2026", estado: "En producción", ola: 1 },
   { nombre: "Second Brain", resumen: "Memoria técnica compartida entre proyectos y agentes de IA.", stack: ["Obsidian", "Markdown", "Git"], commits: 85, periodo: "sep → oct 2026", estado: "Activo", ola: 2 },
   { nombre: "Music Map", resumen: "Constelación interactiva de afinidades entre artistas.", stack: ["FastAPI", "React", "D3"], commits: 54, periodo: "ago → sep 2026", estado: "Pausado", ola: 2 },
 ];
@@ -81,7 +81,7 @@ export const antipatrones = [
 ];
 
 export const enciclopedias = [
-  { area: "Astrofísica", titulo: "El Universo como Sistema", detalle: "Cosmología observacional, red cósmica, astrofísica estelar y escalas. 4 tomos, 81 capítulos, con fórmulas y tablas.", estado: "Sitio de lectura listo; se publica en su propio subdominio." },
+  { area: "Astrofísica", titulo: "El Universo como Sistema", detalle: "Cosmología observacional, red cósmica, astrofísica estelar y escalas. 4 tomos y 80 capítulos, con fórmulas y tablas.", estado: "Publicada en universo.noisezero.dev", url: "https://universo.noisezero.dev" },
   { area: "Exploración", titulo: "Misiones Espaciales y Exploración Planetaria", detalle: "De Apolo y Gemini a Artemis, pasando por la exploración robótica profunda y los observatorios en puntos de Lagrange.", estado: "Portal de lectura listo." },
   { area: "Comunicaciones", titulo: "Comunicaciones Espaciales y Redes Interplanetarias", detalle: "Telemetría, enlaces de espacio profundo y redes tolerantes a demoras. Tomo III de la serie del espacio.", estado: "En escritura." },
   { area: "Historia", titulo: "Historia de Chile", detalle: "Diez partes, de la tierra y los primeros pueblos al retorno a la democracia y el pueblo mapuche, con seis apéndices.", estado: "Segunda ola." },

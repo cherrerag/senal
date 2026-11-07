@@ -1,0 +1,111 @@
+---
+import Revista from "../../layouts/Revista.astro";
+const vistas = [
+  ["Today", "Lo que está en ejecución, las prioridades P0 y los bloqueos. Nada más."],
+  ["Board", "Un tablero de cinco columnas que no deja mover una tercera tarea a ejecución."],
+  ["Forest", "El portafolio: cada proyecto con su definición de terminado y su estado de madurez."],
+  ["Radar", "El estado de git de cada repositorio, al instante, con un clic para abrirlo."],
+  ["Incubator", "Los «nidos de indagación»: ideas y lecturas que esperan antes de volverse proyecto."],
+];
+---
+<Revista title="COCKPIT" description="Caso de estudio: el centro de mando personal que limita el trabajo en curso a dos tareas críticas y vigila nueve repositorios.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
+    <span class="eyebrow">Caso de estudio · abril → octubre 2026 · en producción, uso privado</span>
+    <h1>COCK<em>PIT</em></h1>
+    <p class="lead">Cuando construir se volvió barato, el problema dejó de ser técnico: llegué a tener <strong>nueve repositorios activos</strong> y ninguna forma de saber en qué estaba de verdad. COCKPIT es la respuesta: un centro de mando que me obliga a terminar antes de empezar.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
+    <div class="sec-c prosa">
+      <h2>Ejecución barata, foco caro.</h2>
+      <p>Con agentes de IA, abrir un proyecto nuevo cuesta una tarde. Cerrarlo bien cuesta semanas. En pocos meses tenía ideas a medio camino, tareas repartidas entre Notion y archivos sueltos, y sesiones de trabajo que empezaban sin saber dónde había quedado la anterior.</p>
+      <p>Como Product Owner conozco la cura: límite de trabajo en curso, definición de terminado y un tablero que diga la verdad. Lo que faltaba era una herramienta que lo aplicara aunque yo no quisiera.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Qué construí</span></div>
+    <div class="sec-c">
+      <h2>Cinco vistas y una regla que no se negocia.</h2>
+      <div class="cifras">
+        <div class="cifra vidrio"><b>2</b><span>tareas críticas en ejecución como máximo</span></div>
+        <div class="cifra vidrio"><b>9</b><span>repositorios bajo el radar</span></div>
+        <div class="cifra vidrio"><b>5.495</b><span>notas antiguas de Notion destiladas a Markdown</span></div>
+        <div class="cifra vidrio"><b>62</b><span>commits</span></div>
+      </div>
+      <ol class="vistas">
+        {vistas.map(([v, d]) => <li class="aparece"><span class="v">{v}</span><span class="d">{d}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">03</span><span class="eyebrow">Cómo funciona</span></div>
+    <div class="sec-c">
+      <h2>Un proyecto tiene que <em>ganarse</em> el nombre.</h2>
+      <div class="madurez vidrio" role="img" aria-label="Escalera de madurez: Idea, luego Borrador con definición de terminado, luego Proyecto con documento de requisitos y tareas vinculadas">
+        <div class="paso"><span class="eyebrow">1</span><b>Idea</b><span>Se captura sin requisitos y espera siete días en la incubadora.</span></div>
+        <span class="flecha" aria-hidden="true">→</span>
+        <div class="paso"><span class="eyebrow">2</span><b>Borrador</b><span>Necesita una definición de terminado escrita.</span></div>
+        <span class="flecha" aria-hidden="true">→</span>
+        <div class="paso"><span class="eyebrow">3</span><b>Proyecto</b><span>Necesita su documento de requisitos, tareas vinculadas y mi confirmación.</span></div>
+      </div>
+      <div class="prosa">
+        <p>La promoción nunca es automática: es una decisión que tomo con los datos a la vista. Y cada sesión termina con <code>cierra-sesion</code>, un comando de terminal que revisa la integridad del repositorio, guía el commit, actualiza el estado de las tareas y publica.</p>
+      </div>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio"><span class="eyebrow">Estratega</span><h3>Gemini</h3><p>Lee todo el contexto de golpe, detecta contradicciones entre documentos, destila notas en requisitos y prepara el resumen de cada mañana.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Cirujano</span><h3>Claude Code</h3><p>Trabaja dentro de un repositorio a la vez: implementa la especificación, depura y deja commits limpios.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Orquestador</span><h3>Antigravity</h3><p>Audita la carpeta de proyectos, corre la telemetría de git y valida que los datos estén íntegros.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">04</span><span class="eyebrow">Lo que salió mal</span></div>
+    <div class="sec-c">
+      <h2>La versión 1 dependía de Notion.</h2>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">v1 · abril → mayo</span><h3>Una base que no era base</h3><p>Tareas y proyectos vivían en Notion. Cada cambio de campo en la interfaz rompía la sincronización, y cada lectura tardaba lo que tarda una API externa.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Una pausa de cuatro meses</span><h3>El mando también se abandona</h3><p>Entre junio y octubre COCKPIT casi no se tocó. El sistema para no dispersarme fue una de las víctimas de la dispersión.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">v2 · octubre</span><h3>Una sola fuente de verdad</h3><p>En una semana de octubre migré tareas y proyectos a Supabase, desconecté Notion de la operación diaria y lo destilé a Markdown. Las vistas responden en menos de 40 milisegundos.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">05</span><span class="eyebrow">Resultado</span></div>
+    <div class="sec-c">
+      <h2>Pausar también es una decisión de producto.</h2>
+      <div class="prosa">
+        <p>COCKPIT v2 corre en Vercel, se instala como app en el teléfono y se despliega con cada cierre de sesión. Es privado: tiene mis tareas, mis notas y una puerta de acceso propia.</p>
+        <p>Su mejor resultado no es una pantalla. Es la limpieza de octubre: con el radar a la vista, pausé Noise Zero, Cava Musical y Music Map con fecha de revisión, y de esa limpieza nació <a href="/metodo">el método</a> que cuento en este sitio.</p>
+      </div>
+      <div class="chips"><span class="chip">Next.js 16</span><span class="chip">Supabase · PostgreSQL</span><span class="chip">Gemini</span><span class="chip">PWA</span><span class="chip">Vercel</span><span class="chip">zsh</span></div>
+      <a class="siguiente vidrio" href="/proyectos/noise-zero"><div><span class="eyebrow">Otro caso</span><h3>Noise Zero</h3></div><span class="boton">Leer →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .vistas { list-style: none; margin: 0; padding: 0; display: grid; }
+  .vistas li { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 20px; padding-block: 16px; border-top: 1px solid var(--line); align-items: baseline; }
+  .vistas .v { font-family: var(--display); font-size: 28px; color: var(--accent); }
+  .vistas .d { color: var(--fg-2); }
+  .madurez { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; padding: 22px; align-items: stretch; }
+  .paso { display: grid; gap: 6px; align-content: start; padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+  .paso:last-child { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .paso b { font-family: var(--display); font-weight: 400; font-size: 28px; }
+  .paso span:last-child { color: var(--fg-2); font-size: 15.5px; }
+  .flecha { align-self: center; color: var(--accent); font-size: 22px; }
+  code { font-family: var(--mono); font-size: 0.9em; color: var(--accent); }
+  .prosa a { color: var(--accent); }
+  @media (max-width: 760px) {
+    .vistas li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .madurez { grid-template-columns: minmax(0, 1fr); }
+    .flecha { transform: rotate(90deg); justify-self: center; }
+  }
+</style>

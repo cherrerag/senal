@@ -20,12 +20,12 @@ import { enciclopedias } from "../data/sitio";
               <span class="eyebrow">{e.area}</span>
               <h2>{e.titulo}</h2>
               <p>{e.detalle}</p>
-              <span class="mono estado">{e.estado}</span>
+              {e.url ? <a class="mono estado enlace" href={e.url}>{e.estado} ↗</a> : <span class="mono estado">{e.estado}</span>}
             </div>
           </li>
         ))}
       </ol>
-      <p class="mono muted">Los sitios de lectura se abren en esta biblioteca a medida que se publican. Las obras se basan en fuentes públicas; los textos de terceros no se reproducen.</p>
+      <p class="mono muted">Los sitios de lectura se abren aquí a medida que se publican. Las obras se basan en fuentes públicas; los textos de terceros no se reproducen.</p>
     </div>
   </section>
 </Revista>
@@ -39,5 +39,6 @@ import { enciclopedias } from "../data/sitio";
   .ficha h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.08; }
   .ficha p { color: var(--fg-2); max-width: 64ch; }
   .estado { color: var(--accent); }
+  .enlace { width: fit-content; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
   @media (max-width: 600px) { .estante li { grid-template-columns: 40px minmax(0, 1fr); } .ficha { padding: 18px; } }
 </style>

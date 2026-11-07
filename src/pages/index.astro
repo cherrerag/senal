@@ -1,0 +1,130 @@
+---
+import Base from "../layouts/Base.astro";
+import Signal from "../components/Signal.astro";
+import { hitos } from "../data/sitio";
+---
+<Base>
+  <div class="contenedor">
+    <header class="top">
+      <a class="logo" href="/">Claudio <em>Herrera</em></a>
+      <span class="mono muted">Santiago · noviembre 2026</span>
+    </header>
+
+    <section class="intro">
+      <h1>Construyo sistemas reales con <em>agentes</em> de IA.</h1>
+      <span class="mono muted">6 sistemas · 456 commits · 3 en producción</span>
+    </section>
+
+    <main class="mosaico">
+      <a class="tile vidrio t-nz aparece" href="/proyectos" transition:name="t-proyectos">
+        <div class="k"><span class="eyebrow">Proyecto · en producción</span><span class="go" aria-hidden="true">↗</span></div>
+        <picture class="foto">
+          <source media="(max-width: 700px)" srcset="/fotos/sala-700.webp" />
+          <img src="/fotos/sala.webp" alt="La sala de escucha: tornamesa, streamer, amplificador y parlantes de piso con luz azul" width="1200" height="1500" loading="eager" />
+        </picture>
+        <h3>Noise Zero</h3>
+        <p>Una sala que se escucha a sí misma y compone la luz con 480 LEDs.</p>
+        <div class="chips"><span class="chip">ESP32-S3</span><span class="chip">Raspberry Pi</span><span class="chip">171 commits</span></div>
+      </a>
+
+      <div class="tile vidrio t-sig aparece"><Signal label="ruido → señal" /></div>
+
+      <a class="tile vidrio t-cava aparece" href="/proyectos">
+        <div class="k"><span class="eyebrow">Proyecto · en producción</span><span class="go" aria-hidden="true">↗</span></div>
+        <span class="big">5.087</span>
+        <h3>Cava Musical</h3>
+        <p>Álbumes hi-fi con un sommelier de búsqueda semántica.</p>
+      </a>
+
+      <a class="tile vidrio t-ess aparece" href="/ensayos" transition:name="t-ensayos">
+        <div class="k"><span class="eyebrow">Ensayo · junio 2026</span><span class="go" aria-hidden="true">↗</span></div>
+        <blockquote>No se trata de saber más. Se trata de aprender a estar cómodo con lo que no sabemos.</blockquote>
+        <span class="mono muted bottom">10 ideas críticas · las dos primeras</span>
+      </a>
+
+      <a class="tile vidrio t-tl aparece" href="/bitacora" transition:name="t-bitacora">
+        <div class="k"><span class="eyebrow">Bitácora</span><span class="go" aria-hidden="true">↗</span></div>
+        <h3>Dos cambios en 2026</h3>
+        <ol class="mini-tl">
+          {hitos.map((h) => (
+            <li class={h.cambio ? "cambio" : ""}><span class="mono">{h.fecha.slice(5)}</span>{h.titulo}</li>
+          ))}
+        </ol>
+      </a>
+
+      <a class="tile vidrio t-lib aparece" href="/biblioteca" transition:name="t-biblioteca">
+        <div class="k"><span class="eyebrow">Biblioteca</span><span class="go" aria-hidden="true">↗</span></div>
+        <ul class="lista"><li>El Universo como Sistema</li><li>Misiones Espaciales</li><li>Historia de Chile</li><li>Transmisión de Datos 2027</li></ul>
+      </a>
+
+      <a class="tile vidrio t-met aparece" href="/metodo" transition:name="t-metodo">
+        <div class="k"><span class="eyebrow">Método</span><span class="go" aria-hidden="true">↗</span></div>
+        <ol class="lista"><li>Los documentos son el estado</li><li>Diseñar antes de codificar</li><li>Terminado es verificado</li><li>WIP estricto</li></ol>
+      </a>
+
+      <a class="tile vidrio t-now aparece" href="/ahora" transition:name="t-ahora">
+        <div class="k"><span class="eyebrow">Ahora</span><span class="go" aria-hidden="true">↗</span></div>
+        <h3>Construyendo este sitio</h3>
+        <p>Y terminando el Tomo III de la enciclopedia del espacio.</p>
+        <span class="mono muted bottom">actualizado 7 nov 2026</span>
+      </a>
+    </main>
+
+    <footer class="pie mono muted">
+      <span>claudio herrera · señal</span>
+      <span>escrito en markdown · publicado con git</span>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 24px; flex-wrap: wrap; }
+  .logo { font-family: var(--display); font-size: 24px; letter-spacing: -0.01em; }
+  .logo em { font-style: normal; color: var(--accent); }
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; padding-block: 28px 32px; }
+  .intro h1 { font-size: clamp(42px, 6vw, 90px); line-height: 0.98; letter-spacing: -0.02em; }
+  .intro h1 em { font-style: normal; color: var(--accent); }
+
+  .mosaico { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(118px, auto); gap: 12px; padding-bottom: 64px; }
+  .tile { position: relative; padding: 22px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; min-width: 0;
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), border-color 0.3s; }
+  a.tile:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .k { display: flex; justify-content: space-between; align-items: center; }
+  .go { color: var(--accent); transition: transform 0.3s; }
+  a.tile:hover .go { transform: translate(3px, -3px); }
+  .tile h3 { font-size: 28px; line-height: 1.08; }
+  .tile p { color: var(--fg-2); font-size: 16.5px; }
+  .bottom { margin-top: auto; }
+  .big { font-family: var(--display); font-size: 60px; line-height: 1; }
+
+  .t-nz { grid-column: span 7; grid-row: span 3; }
+  .foto { aspect-ratio: 16 / 10; border-radius: 9px; overflow: hidden; border: 1px solid var(--line); }
+  .foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  a.tile:hover .foto img { transform: scale(1.03); }
+  .t-sig { grid-column: span 5; grid-row: span 1; padding: 0; }
+  .t-cava { grid-column: span 5; grid-row: span 2; }
+  .t-ess { grid-column: span 5; grid-row: span 2; background: var(--tile-strong); }
+  .t-ess blockquote { margin: 0; font-family: var(--display); font-size: 26px; line-height: 1.22; }
+  .t-tl { grid-column: span 7; grid-row: span 2; }
+  .mini-tl { list-style: none; margin: auto 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+  .mini-tl li { padding: 12px 10px 0 0; display: grid; gap: 2px; font-size: 14.5px; }
+  .mini-tl li + li { padding-left: 10px; border-left: 1px solid var(--line); }
+  .mini-tl .mono { color: var(--fg-2); }
+  .mini-tl .cambio .mono, .mini-tl .cambio { color: var(--accent); }
+  .t-lib, .t-met, .t-now { grid-column: span 4; grid-row: span 2; }
+  .t-now { background: color-mix(in srgb, var(--accent) 12%, var(--tile)); }
+  .lista { margin: 0; padding: 0; list-style: none; display: grid; font-size: 16px; }
+  .lista li { padding-block: 7px; border-bottom: 1px solid var(--line); }
+
+  .pie { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 24px 40px; border-top: 1px solid var(--line); font-size: 12px; }
+
+  @media (max-width: 900px) {
+    .mosaico { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .mosaico .tile { grid-column: span 2; grid-row: auto; }
+    .t-sig { min-height: 120px; }
+    .foto { aspect-ratio: 4 / 5; }
+    .mini-tl { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; }
+    .mini-tl li:nth-child(odd) { padding-left: 0; border-left: 0; }
+    .intro { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

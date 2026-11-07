@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import { secciones } from "../data/sitio";
+
+export function getStaticPaths() {
+  return secciones.map((s) => ({ params: { seccion: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+---
+<Base title={`${s.nombre} · Claudio Herrera`} description={s.resumen}>
+  <div class="contenedor">
+    <header class="top">
+      <a class="logo" href="/">Claudio <em>Herrera</em></a>
+      <nav aria-label="Secciones">
+        {secciones.map((x) => (
+          <a href={`/${x.slug}`} aria-current={x.slug === s.slug ? "page" : undefined}>{x.nombre}</a>
+        ))}
+      </nav>
+    </header>
+    <main class="vidrio pendiente" transition:name={`t-${s.slug}`}>
+      <span class="eyebrow">En construcción · fase {s.fase}</span>
+      <h1>{s.nombre}</h1>
+      <p class="muted">{s.resumen}</p>
+      <a class="volver mono" href="/">← volver a la portada</a>
+    </main>
+  </div>
+</Base>
+
+<style>
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 16px 28px; padding-block: 24px; flex-wrap: wrap; }
+  .logo { font-family: var(--display); font-size: 24px; }
+  .logo em { font-style: normal; color: var(--accent); }
+  nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 15px; }
+  nav a { color: var(--fg-2); padding-block: 4px; border-bottom: 1px solid transparent; }
+  nav a:hover, nav a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); }
+  .pendiente { margin-block: 48px 96px; padding: clamp(24px, 5vw, 56px); display: grid; gap: 18px; max-width: 760px; }
+  .pendiente h1 { font-size: clamp(44px, 7vw, 88px); line-height: 1; }
+  .volver { color: var(--accent); margin-top: 8px; }
+</style>

@@ -1,0 +1,68 @@
+---
+/* La señal que emerge del ruido. Lienzo decorativo; respeta «reducir movimiento». */
+interface Props { label?: string }
+const { label = "ruido → señal" } = Astro.props;
+---
+<div class="senal" aria-label="Ilustración: una señal que emerge del ruido" role="img">
+  <canvas data-senal></canvas>
+  <span class="etiqueta">{label}</span>
+</div>
+
+<style>
+  .senal { position: relative; width: 100%; height: 100%; min-height: 110px; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .etiqueta { position: absolute; left: 16px; bottom: 12px; font-family: var(--mono); font-size: 11px; color: var(--fg-2); }
+</style>
+
+<script>
+  function iniciar() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll<HTMLCanvasElement>("canvas[data-senal]").forEach((c) => {
+      if (c.dataset.vivo) return;
+      c.dataset.vivo = "1";
+      const ctx = c.getContext("2d");
+      if (!ctx) return;
+      const seed = Array.from({ length: 260 }, () => Math.random() * 2 - 1);
+      const size = () => {
+        const r = c.getBoundingClientRect();
+        const d = devicePixelRatio || 1;
+        c.width = r.width * d;
+        c.height = r.height * d;
+        ctx.setTransform(d, 0, 0, d, 0, 0);
+      };
+      const cs = getComputedStyle(document.documentElement);
+      const fg = cs.getPropertyValue("--fg-2").trim();
+      const ac = cs.getPropertyValue("--accent").trim();
+      const draw = (t: number) => {
+        const w = c.clientWidth, h = c.clientHeight;
+        if (!w || !h) return;
+        ctx.clearRect(0, 0, w, h);
+        const N = seed.length, mid = h * 0.45, ph = t / 1300, sh = Math.floor(t / 80);
+        ctx.fillStyle = fg;
+        for (let i = 0; i < N; i++) {
+          const k = i / (N - 1), a = (1 - k) * (1 - k);
+          ctx.globalAlpha = 0.6 * a + 0.06;
+          ctx.fillRect(k * w, mid + seed[(i + sh) % N] * h * 0.38 * a + Math.sin(k * 16 + ph) * h * 0.22 * k, 1.6, 1.6);
+        }
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = ac;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < N; i++) {
+          const k = i / (N - 1), a = (1 - k) * (1 - k);
+          const y = mid + Math.sin(k * 16 + ph) * h * 0.22 * k + seed[(i + sh) % N] * h * 0.38 * a * 0.3;
+          i ? ctx.lineTo(k * w, y) : ctx.moveTo(k * w, y);
+        }
+        ctx.stroke();
+      };
+      size();
+      draw(0);
+      addEventListener("resize", () => { size(); draw(0); });
+      if (!reduce) {
+        const loop = (t: number) => { if (!c.isConnected) return; draw(t); requestAnimationFrame(loop); };
+        requestAnimationFrame(loop);
+      }
+    });
+  }
+  document.addEventListener("astro:page-load", iniciar);
+</script>

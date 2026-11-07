@@ -1,0 +1,42 @@
+---
+import "@fontsource/gloock/400.css";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/nebulosa.css";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Claudio Herrera · Señal",
+  description = "Proyectos, bitácora, enciclopedias y ensayos de Claudio Herrera, Product Owner que construye sistemas reales con agentes de IA.",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#05040c" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL("/fotos/sala.webp", Astro.site)} />
+    <meta property="og:locale" content="es_CL" />
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="estrellas" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

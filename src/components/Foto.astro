@@ -3,7 +3,7 @@
 const dims: Record<string, [number, number]> = {
   acustica: [940, 640], cables: [1200, 1500], "cava-muro": [1230, 330], escritorio: [1400, 1050],
   esp32: [1200, 1500], esquema: [1200, 1500], kiosco: [1400, 1050], luz: [1200, 1500],
-  pcb: [1200, 1500], radios: [1400, 1050], raspberry: [1200, 1500], sala: [1200, 1500],
+  pcb: [1200, 1500], radios: [1400, 1050], raspberry: [1200, 1500], sala: [1200, 1500], "cockpit-board": [1400, 798], "cockpit-incubadora": [1400, 798], "cockpit-forest": [1400, 798], "cockpit-radar": [1400, 798], "cava-galeria": [1400, 818], "cava-busqueda": [1400, 818], "secondbrain-grafo": [1400, 1146], musicmap: [1280, 710], "musicmap-movil": [390, 844],
 };
 interface Props { n: string; alt: string; pie?: string; class?: string; eager?: boolean; pos?: string }
 const { n, alt, pie, class: clase, eager = false, pos = "50% 50%" } = Astro.props;

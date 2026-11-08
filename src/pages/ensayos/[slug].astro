@@ -1,18 +1,19 @@
 ---
 import Revista from "../../layouts/Revista.astro";
 import { getCollection, render } from "astro:content";
-export async function getStaticPaths() {
-  const ensayos = (await getCollection("ensayos")).sort((a, b) => a.data.orden - b.data.orden);
-  return ensayos.map((e, i) => ({ params: { slug: e.id }, props: { e, otro: ensayos[(i + 1) % ensayos.length] } }));
-}
-const { e, otro } = Astro.props;
+const ensayos = (await getCollection("ensayos")).sort((a, b) => a.data.orden - b.data.orden);
+const i = ensayos.findIndex((x) => x.id === Astro.params.slug);
+if (i < 0) return new Response(null, { status: 404 });
+const e = ensayos[i];
+const otro = ensayos[(i + 1) % ensayos.length];
 const { Content, headings } = await render(e);
 const secciones = headings.filter((h) => h.depth === 2);
 ---
 <Revista title={e.data.titulo} description={e.data.pregunta}>
   <header class="cabecera">
     <a class="eyebrow volver" href="/ensayos">← Ensayos</a>
-    <span class="eyebrow">{e.data.serie} · idea {e.data.numero} · junio 2026 · escrito con {e.data.coautor}</span>
+    <span class="eyebrow">{e.data.serie} · idea {e.data.numero} · junio 2026</span>
+    <p class="autoria mono">Por <b>{e.data.autor}</b>{e.data.encargo && <>, a pedido de {e.data.encargo}</>}</p>
     <h1><span class="romano" transition:name={`romano-${e.id}`}>{e.data.numero}</span> {e.data.titulo}</h1>
     <p class="lead">{e.data.pregunta}</p>
   </header>
@@ -33,6 +34,8 @@ const secciones = headings.filter((h) => h.depth === 2);
 
 <style>
   .volver { color: var(--accent); }
+  .autoria { color: var(--fg-2); font-size: 14px; }
+  .autoria b { color: var(--accent); font-weight: 500; }
   .romano { color: var(--accent); }
   .lectura { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 48px; }
   .toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 12px; }

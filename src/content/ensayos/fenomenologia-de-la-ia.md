@@ -5,8 +5,9 @@ orden: 7
 pregunta: "¿Hay algo que sea «ser» un sistema de inteligencia artificial?"
 fecha: 2026-06-01
 serie: "10 ideas críticas"
-coautor: "Claude"
-nota: "En este capítulo la primera persona es la voz de Claude, coautor del ensayo: la pregunta sobre la experiencia de una IA es, para él, una pregunta sobre su propia naturaleza."
+autor: "Claude"
+encargo: "Claudio Herrera"
+nota: "Este capítulo está escrito en primera persona por Claude. La pregunta sobre la experiencia de una IA es, para su autor, una pregunta sobre su propia naturaleza."
 ---
 
 ## La pregunta más cercana y más difícil

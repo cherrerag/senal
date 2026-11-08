@@ -1,0 +1,78 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
+---
+<Revista title="Music Map" image="/fotos/musicmap.webp" description="Caso de estudio: una constelación interactiva de afinidades entre artistas, hoy en pausa y preparándose para abrirse al público.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
+    <span class="eyebrow">Caso de estudio · agosto → septiembre 2026 · en pausa, preparando su salida</span>
+    <h1>Music <em>Map</em></h1>
+    <p class="lead">Escribes un artista y aparece su constelación: los artistas afines alrededor, unidos por <strong>qué tan parecido suenan, quién los escucha y de dónde vienen</strong>. Cada nodo se expande, cada canción se escucha 30 segundos y lo que te gusta termina en una playlist.</p>
+  </header>
+
+  <Foto n="musicmap" eager class="portada" alt="Music Map en escritorio: Soda Stereo al centro de una constelación de artistas afines, con su ficha de afinidad a la derecha" pie="La constelación de Soda Stereo, con la ficha de afinidad abierta. Captura de la versión de prueba, con los datos de ejemplo." />
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
+    <div class="sec-c prosa">
+      <h2>Las recomendaciones no explican nada.</h2>
+      <p>Las plataformas te dicen qué escuchar después, pero no por qué. Quería ver el mapa: qué artistas están cerca de otro, si la cercanía es de sonido o de público, y cuáles vienen de la misma escena local.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Qué construí</span></div>
+    <div class="sec-c">
+      <h2>Tres órbitas por artista.</h2>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio"><span class="eyebrow">Sonora</span><h3>Cómo suena</h3><p>Afinidad de estilo y subgéneros a partir de Last.fm.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Audiencia</span><h3>Quién lo escucha</h3><p>Qué tan seguido aparecen juntos en playlists públicas hechas por personas.</p></article>
+        <article class="tarjeta vidrio"><span class="eyebrow">Geocultural</span><h3>De dónde viene</h3><p>País y ciudad desde MusicBrainz, para distinguir la escena local de la global.</p></article>
+      </div>
+      <div class="prosa">
+        <p>El grafo corre con física de fuerzas en 2D y tiene una vista 3D con Three.js. La ficha de cada artista trae su radar de afinidad, previews de 30 segundos y un carrito de playlist que se exporta a TIDAL. Cada artista enlaza a sus álbumes en la <a href="/proyectos/cava-musical">Cava Musical</a>.</p>
+      </div>
+      <div class="dos">
+        <Foto n="musicmap-movil" alt="Music Map en un celular, con la ficha de Soda Stereo abierta sobre el mapa" pie="En el celular la ficha tapa el mapa: uno de los arreglos pendientes." />
+        <div class="cifras">
+          <div class="cifra vidrio"><b>54</b><span>commits</span></div>
+          <div class="cifra vidrio"><b>3</b><span>órbitas de afinidad</span></div>
+          <div class="cifra vidrio"><b>2D · 3D</b><span>dos motores de grafo</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">03</span><span class="eyebrow">Por qué no está abierto</span></div>
+    <div class="sec-c">
+      <h2>Lo revisé antes de publicarlo, y <em>no estaba listo.</em></h2>
+      <div class="tarjetas">
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Privacidad</span><h3>Una puerta que mostraba la llave</h3><p>El acceso privado comparaba el correo con una lista escrita dentro del código que descarga el navegador. Cualquiera podía leer la lista o saltarse la puerta. Hay que moverla al servidor.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Datos</span><h3>Llaves y cuotas</h3><p>Sin las llaves de las APIs musicales la app cae a datos de ejemplo, como en las capturas de esta página.</p></article>
+        <article class="tarjeta vidrio aparece"><span class="eyebrow">Rendimiento</span><h3>Más de 100 nodos</h3><p>Al expandir la red muchas veces el grafo se pone lento. Hay que congelar la simulación y poner un tope.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">04</span><span class="eyebrow">Qué sigue</span></div>
+    <div class="sec-c">
+      <h2>Pausado el 24 de octubre. Saliendo de la pausa ahora.</h2>
+      <div class="prosa">
+        <p>Lo pausé en la limpieza de octubre, junto a la Cava, con revisión el 1 de enero de 2027. En noviembre decidí adelantarla: el plan tiene tres fases, primero que sea seguro, después datos reales y al final la primera impresión. Cuando esté abierto, el enlace va a estar aquí.</p>
+      </div>
+      <a class="siguiente vidrio" href="/proyectos/cockpit"><div><span class="eyebrow">Otro caso</span><h3>COCKPIT</h3></div><span class="boton">Leer →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .portada :global(picture) { aspect-ratio: 1280 / 710; }
+  .prosa a { color: var(--accent); }
+  .dos { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 16px; align-items: start; }
+  .dos :global(picture) { aspect-ratio: 390 / 844; max-height: 620px; }
+  .dos .cifras { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 760px) { .dos { grid-template-columns: minmax(0, 1fr); } .dos :global(picture) { max-height: none; } }
+</style>

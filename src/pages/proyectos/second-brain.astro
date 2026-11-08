@@ -1,0 +1,80 @@
+---
+import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
+const carpetas = [
+  ["00_Meta", "Las reglas del sistema, las plantillas y las instrucciones para los agentes."],
+  ["01_Inbox", "Captura rápida, sin clasificar."],
+  ["02_Projects", "Una carpeta por proyecto vivo: specs, decisiones y estado."],
+  ["03_Areas", "Temas que no terminan: música, exploración espacial."],
+  ["04_Knowledge", "Conocimiento reutilizable: arquitectura, backend, frontend, hardware, auditorías."],
+  ["05_Archive", "Lo que ya no está activo, incluido todo lo que vivía en Notion."],
+];
+---
+<Revista title="Second Brain" image="/fotos/secondbrain-grafo.webp" description="Caso de estudio: una bóveda de Markdown en Obsidian que comparten los proyectos y los agentes de IA.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
+    <span class="eyebrow">Caso de estudio · septiembre → octubre 2026 · activo</span>
+    <h1>Second <em>Brain</em></h1>
+    <p class="lead">El primer problema de trabajar con IA fue que <strong>el contexto vivía en los chats</strong>: cuando el chat terminaba, el proyecto perdía la memoria. Second Brain es la respuesta: una carpeta de archivos Markdown, versionada en git, que leen tanto yo en Obsidian como los agentes en la terminal.</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">01</span><span class="eyebrow">Qué construí</span></div>
+    <div class="sec-c">
+      <h2>Una carpeta común, <em>leída por dos.</em></h2>
+      <div class="cifras">
+        <div class="cifra vidrio"><b>5.316</b><span>notas en Markdown</span></div>
+        <div class="cifra vidrio"><b>5.495</b><span>notas destiladas desde 16 bases de Notion</span></div>
+        <div class="cifra vidrio"><b>7</b><span>etapas completadas</span></div>
+        <div class="cifra vidrio"><b>85</b><span>commits</span></div>
+      </div>
+      <div class="prosa">
+        <p>No hay base de datos ni servicio en la nube: cada nota es un archivo de texto en mi Mac. Obsidian los muestra como una red de ideas enlazadas; Claude Code los lee siguiendo un protocolo escrito en el propio vault, que le dice dónde guardar cada cosa y cómo pasar de una nota a una especificación, y de la especificación a un pull request.</p>
+      </div>
+      <ol class="carpetas">
+        {carpetas.map(([c, d]) => <li><span class="mono">{c}</span><span>{d}</span></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">02</span><span class="eyebrow">Lo que muestra el grafo</span></div>
+    <div class="sec-c">
+      <h2>Un núcleo conectado y un anillo que <em>todavía no conversa.</em></h2>
+      <Foto n="secondbrain-grafo" alt="Vista de grafo de Obsidian: un núcleo denso de notas al centro, un pequeño grupo enlazado arriba y un gran anillo exterior de miles de puntos sueltos" pie="La vista de grafo del vault en Obsidian." />
+      <div class="prosa">
+        <p>El grafo cuenta la verdad sin adornos. Los grupos densos son notas enlazadas entre sí. El gran anillo exterior son notas sueltas, sin ningún enlace. Como 5.241 de las 5.316 notas están en el archivo que llegó de Notion en octubre, ese anillo es sobre todo eso: material guardado y buscable, pero todavía sin conectar. Destilar fue rápido; conectar es el trabajo que sigue.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">03</span><span class="eyebrow">Cómo se usó</span></div>
+    <div class="sec-c">
+      <h2>Siete etapas en dos meses.</h2>
+      <ol class="etapas">
+        <li><b>Cimientos.</b> Estructura de carpetas, plantillas, protocolo para agentes y git.</li>
+        <li><b>Arqueología.</b> Ingesta de los proyectos existentes: Noise Zero y la Cava, con su deuda técnica.</li>
+        <li><b>De la nota al código.</b> Un flujo para que una especificación escrita en el vault termine como pull request en un repositorio.</li>
+        <li><b>Tableros.</b> Consultas automáticas y lienzos visuales dentro de Obsidian.</li>
+        <li><b>Auditoría.</b> Linajes de código, antipatrones y un playbook de lo aprendido.</li>
+        <li><b>Exploración espacial.</b> Investigación para las enciclopedias.</li>
+        <li><b>Consolidación hi-fi.</b> El túnel, el gateway y el control persistente de la sala.</li>
+      </ol>
+      <a class="siguiente vidrio" href="/proyectos/cockpit"><div><span class="eyebrow">Su compañero</span><h3>COCKPIT</h3></div><span class="boton">Leer →</span></a>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .carpetas, .etapas { margin: 0; padding: 0; display: grid; }
+  .carpetas { list-style: none; }
+  .carpetas li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding-block: 12px; border-top: 1px solid var(--line); }
+  .carpetas .mono { color: var(--accent); padding-top: 3px; }
+  .carpetas span:last-child { color: var(--fg-2); }
+  .etapas { padding-left: 1.4em; gap: 10px; color: var(--fg-2); }
+  .etapas b { color: var(--fg); font-weight: 500; }
+  .sec-c :global(.fig picture) { aspect-ratio: 1400 / 1146; max-height: 640px; }
+  @media (max-width: 700px) { .carpetas li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+</style>

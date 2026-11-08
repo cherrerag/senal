@@ -3,15 +3,15 @@ import Revista from "../../layouts/Revista.astro";
 import Foto from "../../components/Foto.astro";
 const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabación íntima", "contrabajo al frente, domingo en la mañana", "voces de mujer, poca producción"];
 ---
-<Revista title="Cava Musical" image="/fotos/cava-muro.webp" description="Caso de estudio: catálogo curado de 5.087 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala de escucha.">
+<Revista title="Cava Musical" image="/fotos/cava-galeria.webp" description="Caso de estudio: catálogo de más de 5.000 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala de escucha.">
   <header class="cabecera">
     <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
     <span class="eyebrow">Caso de estudio · abril → octubre 2026 · en producción</span>
     <h1>Cava <em>Musical</em></h1>
-    <p class="lead">Una cava como la de vinos, pero de discos: <strong>5.087 álbumes</strong> elegidos por cómo suenan, con un sommelier que entiende lo que le pides en palabras y un botón que manda el disco directo a la sala.</p>
+    <p class="lead">Una cava como la de vinos, pero de discos: <strong>más de 5.000 álbumes</strong> elegidos por cómo suenan, con un sommelier que entiende lo que le pides en palabras y un botón que manda el disco directo a la sala.</p>
   </header>
 
-  <Foto n="cava-muro" eager class="portada" alt="Muro de carátulas de álbumes en la galería de la Cava Musical" pie="La galería: carátulas oficiales en alta resolución." />
+  <Foto n="cava-galeria" eager class="portada" alt="La galería de la Cava Musical: carátulas de álbumes de jazz y música clásica, filtros por género a la izquierda y el reproductor de la sala abajo" pie="La galería, con los filtros a la izquierda y el reproductor de la sala abajo. El catálogo muestra hoy 5.075 álbumes, 1.478 de ellos por curar." />
 
   <section class="sec">
     <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
@@ -27,7 +27,7 @@ const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabaci�
     <div class="sec-c">
       <h2>Catálogo, sommelier y control de sala.</h2>
       <div class="cifras">
-        <div class="cifra vidrio"><b>5.087</b><span>álbumes curados</span></div>
+        <div class="cifra vidrio"><b>5.075</b><span>álbumes en el catálogo, 1.478 todavía por curar</span></div>
         <div class="cifra vidrio"><b>99,5%</b><span>con carátula oficial en 1280 px</span></div>
         <div class="cifra vidrio"><b>1.536</b><span>dimensiones por álbum en el índice semántico</span></div>
         <div class="cifra vidrio"><b>&lt;500</b><span>ms de respuesta en la galería</span></div>
@@ -45,13 +45,14 @@ const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabaci�
     <div class="sec-k"><span class="num">03</span><span class="eyebrow">Cómo se busca</span></div>
     <div class="sec-c">
       <h2>Pedir música <em>como se pide un vino.</em></h2>
+      <p class="mono muted">Consultas de ejemplo:</p>
       <div class="consultas" aria-label="Ejemplos de consultas al sommelier">
         {ejemplos.map((e, i) => <p class="consulta vidrio aparece" style={`--i:${i}`}><span class="mono muted">sommelier ›</span> {e}</p>)}
       </div>
       <div class="prosa">
-        <p>Detrás hay tres pasos: un modelo de lenguaje describe cada álbum por su timbre, instrumentos y atmósfera; esa descripción se convierte en un vector y se guarda junto al disco; y cada consulta se compara contra los 5.087 vectores con un índice que responde en milisegundos. El mismo motor alimenta las recomendaciones de cada álbum y un explorador por perillas de ánimo.</p>
+        <p>Detrás hay tres piezas: un modelo de lenguaje enriquece cada álbum con notas de timbre y atmósfera; cada álbum queda representado por un vector de 1.536 dimensiones; y cada consulta se compara contra esos vectores con un índice HNSW. El mismo motor alimenta las recomendaciones de cada álbum y un explorador por perillas de ánimo.</p>
       </div>
-      <Foto n="acustica" class="media" alt="Pantalla del kiosco de la sala con perfiles de ecualización por género" pie="Lo que elige la Cava llega al kiosco de la sala con su perfil de ecualización." />
+      <Foto n="cava-busqueda" alt="Búsqueda directa de «billie» en la Cava: siete álbumes de Billie Holiday, Billie Eilish y The Kinks" pie="Búsqueda directa por texto. El sommelier semántico hoy responde con un error de autorización y está pendiente de revisar." />
     </div>
   </section>
 
@@ -72,7 +73,7 @@ const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabaci�
     <div class="sec-c">
       <h2>En producción, de uso privado.</h2>
       <div class="prosa">
-        <p>La Cava corre en Vercel con su propio dominio y la uso todos los días. No la enlazo aquí porque controla una sala real: el que tiene la Cava abierta tiene el volumen en la mano.</p>
+        <p>La Cava corre en Vercel con su propio dominio. Desde el 24 de octubre está en pausa: funciona, pero no se amplía. No la enlazo aquí porque controla una sala real: el que tiene la Cava abierta tiene el volumen en la mano.</p>
         <p><strong>Lo que sigue:</strong> <span>Music Map</span>, la constelación de afinidades entre artistas, se alimenta del mismo catálogo y vuelve en la segunda ola.</p>
       </div>
       <div class="chips"><span class="chip">Next.js 16</span><span class="chip">Supabase · PostgreSQL</span><span class="chip">pgvector · HNSW</span><span class="chip">Tailwind 4</span><span class="chip">Vercel</span><span class="chip">53 commits</span></div>
@@ -83,10 +84,10 @@ const ejemplos = ["algo cálido para una noche de lluvia", "piano solo, grabaci�
 
 <style>
   .volver { color: var(--accent); }
-  .portada :global(picture) { aspect-ratio: 1230 / 330; }
+  .portada :global(picture) { aspect-ratio: 1400 / 818; }
   .consultas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
   .consulta { padding: 16px 18px; font-family: var(--display); font-size: 21px; line-height: 1.25; }
   .consulta .mono { display: block; font-size: 11.5px; margin-bottom: 6px; }
   .tarjeta a { color: var(--accent); }
-  @media (max-width: 700px) { .portada :global(picture) { aspect-ratio: 16 / 9; } }
+  
 </style>

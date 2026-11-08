@@ -10,7 +10,7 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
   <header class="cabecera" transition:name="t-proyectos">
     <span class="eyebrow">Proyectos · abril → noviembre 2026</span>
     <h1>Problemas propios, <em>resueltos</em> en serio.</h1>
-    <p class="lead">No empecé con un plan de carrera. Quería un catálogo de música hi-fi, una sala de escucha que reaccionara al sonido y un sistema para no perder el hilo de todo lo anterior. Cada proyecto se cuenta igual: el problema, lo que construí, cómo se conecta, lo que salió mal y lo que decidí.</p>
+    <p class="lead">No empecé con un plan de carrera. Quería un catálogo curado de música hi-fi, una sala de escucha que reaccionara al sonido y un planificador de alimentación para mi familia. Después necesité un sistema para no perder el hilo de todo eso. Cada proyecto se cuenta igual: el problema, lo que construí, cómo se conecta, lo que salió mal y lo que decidí.</p>
     <div class="cifras">
       <div class="cifra vidrio"><b>{proyectos.length}</b><span>sistemas</span></div>
       <div class="cifra vidrio"><b>{total}</b><span>commits entre los cinco</span></div>
@@ -37,7 +37,7 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
     </div>
   </section>
 
-  <section class="sec">
+  {ola2.length > 0 && <section class="sec">
     <div class="sec-k"><span class="num">02</span><span class="eyebrow">En camino</span></div>
     <div class="sec-c">
       <h2>Las herramientas que sostienen a las otras.</h2>
@@ -53,7 +53,7 @@ const total = proyectos.reduce((s, p) => s + p.commits, 0);
         ))}
       </div>
     </div>
-  </section>
+  </section>}
 </Revista>
 
 <style>

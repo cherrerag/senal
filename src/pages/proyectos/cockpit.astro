@@ -1,11 +1,13 @@
 ---
 import Revista from "../../layouts/Revista.astro";
+import Foto from "../../components/Foto.astro";
 const vistas = [
   ["Today", "Lo que está en ejecución, las prioridades P0 y los bloqueos. Nada más."],
   ["Board", "Un tablero de cinco columnas que no deja mover una tercera tarea a ejecución."],
   ["Forest", "El portafolio: cada proyecto con su definición de terminado y su estado de madurez."],
   ["Radar", "El estado de git de cada repositorio, al instante, con un clic para abrirlo."],
   ["Incubator", "Los «nidos de indagación»: ideas y lecturas que esperan antes de volverse proyecto."],
+  ["Capacidad", "Cuánta energía y tiempo hay en la semana, antes de comprometer más tareas."],
 ];
 ---
 <Revista title="COCKPIT" description="Caso de estudio: el centro de mando personal que limita el trabajo en curso a dos tareas críticas y vigila nueve repositorios.">
@@ -16,11 +18,13 @@ const vistas = [
     <p class="lead">Cuando construir se volvió barato, el problema dejó de ser técnico: llegué a tener <strong>nueve repositorios activos</strong> y ninguna forma de saber en qué estaba de verdad. COCKPIT es la respuesta: un centro de mando que me obliga a terminar antes de empezar.</p>
   </header>
 
+  <Foto n="cockpit-board" eager class="portada" alt="COCKPIT: tablero de cinco columnas, Inbox, Next Up, In Progress, Blocked y Done, con el coach de IA arriba; los textos están difuminados" pie="El tablero táctico, con el coach de IA arriba. Difuminé los textos de las tareas porque son personales." />
+
   <section class="sec">
     <div class="sec-k"><span class="num">01</span><span class="eyebrow">El problema</span></div>
     <div class="sec-c prosa">
       <h2>Ejecución barata, foco caro.</h2>
-      <p>Con agentes de IA, abrir un proyecto nuevo cuesta una tarde. Cerrarlo bien cuesta semanas. En pocos meses tenía ideas a medio camino, tareas repartidas entre Notion y archivos sueltos, y sesiones de trabajo que empezaban sin saber dónde había quedado la anterior.</p>
+      <p>Con ejecución barata, la tentación es abrir proyectos sin límite. Las tareas vivían en Notion, el contexto vivía en los chats, y cuando un chat terminaba el proyecto perdía la memoria.</p>
       <p>Como Product Owner conozco la cura: límite de trabajo en curso, definición de terminado y un tablero que diga la verdad. Lo que faltaba era una herramienta que lo aplicara aunque yo no quisiera.</p>
     </div>
   </section>
@@ -28,7 +32,7 @@ const vistas = [
   <section class="sec">
     <div class="sec-k"><span class="num">02</span><span class="eyebrow">Qué construí</span></div>
     <div class="sec-c">
-      <h2>Cinco vistas y una regla que no se negocia.</h2>
+      <h2>Seis vistas y una regla que no se negocia.</h2>
       <div class="cifras">
         <div class="cifra vidrio"><b>2</b><span>tareas críticas en ejecución como máximo</span></div>
         <div class="cifra vidrio"><b>9</b><span>repositorios bajo el radar</span></div>
@@ -38,6 +42,11 @@ const vistas = [
       <ol class="vistas">
         {vistas.map(([v, d]) => <li class="aparece"><span class="v">{v}</span><span class="d">{d}</span></li>)}
       </ol>
+      <div class="galeria">
+        <Foto n="cockpit-incubadora" class="media" alt="Vista Incubadora con tarjetas de nidos de indagación en espera; textos difuminados" pie="La incubadora: cada idea espera antes de volverse proyecto." />
+        <Foto n="cockpit-forest" class="media" alt="Vista Forest con tasa de maduración, borradores y salud estratégica de los proyectos; textos difuminados" pie="Forest: madurez y salud de cada proyecto." />
+        <Foto n="cockpit-radar" class="media" alt="Vista Radar con el estado de git de cinco repositorios principales; textos difuminados" pie="El radar de repositorios." />
+      </div>
     </div>
   </section>
 
@@ -91,6 +100,8 @@ const vistas = [
 
 <style>
   .volver { color: var(--accent); }
+  .portada :global(picture) { aspect-ratio: 1400 / 798; }
+  .galeria :global(.fig picture) { aspect-ratio: 1400 / 798; }
   .vistas { list-style: none; margin: 0; padding: 0; display: grid; }
   .vistas li { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 20px; padding-block: 16px; border-top: 1px solid var(--line); align-items: baseline; }
   .vistas .v { font-family: var(--display); font-size: 28px; color: var(--accent); }

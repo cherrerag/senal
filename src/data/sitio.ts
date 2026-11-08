@@ -23,11 +23,11 @@ export type Proyecto = {
 };
 
 export const proyectos: Proyecto[] = [
-  { slug: "noise-zero", nombre: "Noise Zero", resumen: "Una sala de escucha hi-fi que se escucha a sí misma, corrige el ecualizador y compone la luz con 480 LEDs.", stack: ["ESP32-S3", "Raspberry Pi", "FastAPI", "React", "WiiM"], commits: 171, periodo: "abr → oct 2026", estado: "En producción", foto: "sala", ola: 1 },
-  { slug: "cava-musical", nombre: "Cava Musical", resumen: "Catálogo curado de 5.087 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala.", stack: ["Next.js", "Supabase", "pgvector", "Vercel"], commits: 53, periodo: "abr → oct 2026", estado: "En producción", foto: "cava-muro", ola: 1 },
-  { slug: "cockpit", nombre: "COCKPIT", resumen: "Mi centro de mando: una sola fuente de tareas, máximo dos críticas a la vez y un radar de todos los repositorios.", stack: ["Next.js", "Supabase", "Gemini", "PWA"], commits: 62, periodo: "abr → oct 2026", estado: "En producción", ola: 1 },
-  { nombre: "Second Brain", resumen: "Memoria técnica compartida entre proyectos y agentes de IA.", stack: ["Obsidian", "Markdown", "Git"], commits: 85, periodo: "sep → oct 2026", estado: "Activo", ola: 2 },
-  { nombre: "Music Map", resumen: "Constelación interactiva de afinidades entre artistas.", stack: ["FastAPI", "React", "D3"], commits: 54, periodo: "ago → sep 2026", estado: "Pausado", ola: 2 },
+  { slug: "noise-zero", nombre: "Noise Zero", resumen: "Una sala de escucha hi-fi que se mide a sí misma, ecualiza según el disco y compone la luz con 480 LEDs.", stack: ["ESP32-S3", "Raspberry Pi", "FastAPI", "React", "WiiM"], commits: 171, periodo: "abr → oct 2026", estado: "En producción", foto: "sala", ola: 1 },
+  { slug: "cava-musical", nombre: "Cava Musical", resumen: "Catálogo de más de 5.000 álbumes hi-fi con búsqueda semántica, que manda el disco a la sala.", stack: ["Next.js", "Supabase", "pgvector", "Vercel"], commits: 53, periodo: "abr → oct 2026", estado: "En producción", foto: "cava-galeria", ola: 1 },
+  { slug: "cockpit", nombre: "COCKPIT", resumen: "Mi centro de mando: una sola fuente de tareas, máximo dos críticas a la vez y un radar de todos los repositorios.", stack: ["Next.js", "Supabase", "Gemini", "PWA"], commits: 62, periodo: "abr → oct 2026", estado: "En producción", foto: "cockpit-board", ola: 1 },
+  { slug: "second-brain", nombre: "Second Brain", resumen: "Una bóveda de Markdown que comparten mis proyectos y mis agentes de IA: la memoria que los chats no tienen.", stack: ["Obsidian", "Markdown", "Git"], commits: 85, periodo: "sep → oct 2026", estado: "Activo", foto: "secondbrain-grafo", ola: 1 },
+  { slug: "music-map", nombre: "Music Map", resumen: "Una constelación de afinidades entre artistas, que se expande con un clic y termina en una playlist.", stack: ["FastAPI", "React", "D3", "Three.js"], commits: 54, periodo: "ago → sep 2026", estado: "Pausado", foto: "musicmap", ola: 1 },
 ];
 
 // Los dos cambios, fechados con el historial de commits de los repos del M5.
@@ -81,7 +81,7 @@ export const antipatrones = [
 ];
 
 export const enciclopedias = [
-  { area: "Astrofísica", titulo: "El Universo como Sistema", detalle: "Cosmología observacional, red cósmica, astrofísica estelar y escalas. 4 tomos y 80 capítulos, con fórmulas y tablas.", estado: "Publicada en universo.noisezero.dev", url: "https://universo.noisezero.dev" },
+  { area: "Astrofísica", titulo: "El Universo como Sistema", detalle: "Cosmología observacional, red cósmica, astrofísica estelar y escalas. 4 tomos y 80 capítulos, con fórmulas y tablas.", estado: "En revisión: se rehace en un proyecto propio." },
   { area: "Exploración", titulo: "Misiones Espaciales y Exploración Planetaria", detalle: "De Apolo y Gemini a Artemis, pasando por la exploración robótica profunda y los observatorios en puntos de Lagrange.", estado: "Portal de lectura listo." },
   { area: "Comunicaciones", titulo: "Comunicaciones Espaciales y Redes Interplanetarias", detalle: "Telemetría, enlaces de espacio profundo y redes tolerantes a demoras. Tomo III de la serie del espacio.", estado: "En escritura." },
   { area: "Historia", titulo: "Historia de Chile", detalle: "Diez partes, de la tierra y los primeros pueblos al retorno a la democracia y el pueblo mapuche, con seis apéndices.", estado: "Segunda ola." },

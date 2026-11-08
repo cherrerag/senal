@@ -7,7 +7,7 @@ import Foto from "../../components/Foto.astro";
     <a class="eyebrow volver" href="/proyectos">← Proyectos</a>
     <span class="eyebrow">Caso de estudio · abril → octubre 2026 · en producción</span>
     <h1>Noise <em>Zero</em></h1>
-    <p class="lead">Una sala de escucha de 5 × 4 metros que <strong>se escucha a sí misma</strong>: mide con un micrófono, corrige lo que puede con el ecualizador del streamer y compone la luz que acompaña a la música. Sin ser ingeniero acústico y sin llenar el living de paneles.</p>
+    <p class="lead">Una sala de escucha de 5 × 4 metros que <strong>se escucha a sí misma</strong>. El objetivo: medir con un micrófono, corregir lo que se pueda con el ecualizador del streamer y componer la luz que acompaña a la música, sin ser ingeniero acústico y sin llenar el living de paneles. Hoy la sala ya escucha y alumbra; la corrección automática todavía no.</p>
   </header>
 
   <Foto n="sala" eager class="portada" pos="50% 42%" alt="La sala de escucha de noche: tornamesa, streamer y amplificador en un rack negro, con un parlante de piso iluminado de azul" pie="La sala. Rack con tornamesa, streamer WiiM Ultra y amplificador Hegel H95; parlantes Q Acoustics 3050i." />
@@ -17,7 +17,7 @@ import Foto from "../../components/Foto.astro";
     <div class="sec-c prosa">
       <h2>Buen equipo, sala sin medir.</h2>
       <p>Una sala de living nunca suena como la diseñó el fabricante de los parlantes. Los graves se acumulan en las esquinas, algunas frecuencias rebotan y otras desaparecen. La solución clásica son paneles, trampas de graves y un técnico con un micrófono de medición. Yo quería otra cosa: que la sala se midiera sola, que el ecualizador se ajustara a lo que suena y que la luz siguiera a la música en vez de competir con ella.</p>
-      <p>Era también la prueba de fuego de trabajar con IA: hardware real, cables reales, un sistema que tiene que encender solo después de un corte de luz.</p>
+      <p>Fue además el proyecto con más commits de todos (171) y el primero con hardware real: cables, soldadura y un sistema que tiene que encender solo después de un corte de luz.</p>
     </div>
   </section>
 
@@ -59,9 +59,9 @@ import Foto from "../../components/Foto.astro";
           </svg>
         </figure>
         <ol class="pasos">
-          <li data-p="1"><span class="eyebrow">1 · escuchar</span><p>El ESP32 mide la presión sonora de la sala varias veces por segundo y la envía por WebSocket. El 30 de agosto el contador marcaba casi doce millones de cuadros recibidos.</p></li>
-          <li data-p="2"><span class="eyebrow">2 · decidir</span><p>En la Raspberry, FastAPI recibe la medición, sabe qué disco está sonando y elige el perfil de ecualización que le corresponde: por su nombre, nunca por número.</p></li>
-          <li data-p="3"><span class="eyebrow">3 · corregir y alumbrar</span><p>El WiiM aplica el perfil y el orquestador devuelve al ESP32 la escena de luz: color y movimiento según el género y la energía de la música.</p></li>
+          <li data-p="1"><span class="eyebrow">1 · escuchar</span><p>El ESP32 mide la presión sonora de la sala y la envía por WebSocket. El 30 de agosto el contador marcaba casi doce millones de cuadros recibidos.</p></li>
+          <li data-p="2"><span class="eyebrow">2 · medir y ecualizar</span><p>En la Raspberry, FastAPI recibe la medición y la muestra en vivo. El perfil de ecualización se elige según el género del disco, y se pide por su nombre, nunca por número. Que la medición ajuste el ecualizador sola es el paso que viene.</p></li>
+          <li data-p="3"><span class="eyebrow">3 · corregir y alumbrar</span><p>El WiiM aplica el perfil y la tira de LEDs toma su escena: en modo automático sigue al disco que suena, o se elige a mano entre 23 aspectos de luz.</p></li>
           <li data-p="4"><span class="eyebrow">4 · elegir el disco</span><p>Desde el teléfono, la Cava Musical manda el álbum a la sala a través de un túnel cifrado. La sala no expone nada más hacia afuera.</p></li>
         </ol>
       </div>
@@ -113,7 +113,7 @@ import Foto from "../../components/Foto.astro";
       <h2>La sala corre sola.</h2>
       <div class="prosa">
         <p>Desde el 30 de agosto la Raspberry arranca sola, incluso después de un corte de luz, con una dirección fija verificada con un reinicio real. El ESP32 está integrado y la sala se escucha de verdad. El proyecto está en producción y en pausa: funciona todos los días mientras el foco está en otras cosas.</p>
-        <p><strong>Lo que sigue:</strong> los servicios en la nube que analizan la sala con un modelo de lenguaje están diseñados y esperan su turno en la hoja de ruta.</p>
+        <p><strong>Lo que sigue:</strong> la corrección automática a partir de la medición, y los servicios en la nube que analizan la sala con un modelo de lenguaje. Ambos están en la hoja de ruta, sin construir.</p>
       </div>
       <div class="galeria">
         <Foto n="raspberry" class="alta" alt="Raspberry Pi 4 con disipador montada detrás de la pantalla del kiosco, sobre el cuaderno con el esquema" pie="La Raspberry Pi detrás del kiosco." />

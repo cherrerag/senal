@@ -10,7 +10,8 @@ const ensayos = defineCollection({
     pregunta: z.string(),
     fecha: z.coerce.date(),
     serie: z.string(),
-    coautor: z.string().optional(),
+    autor: z.string(),
+    encargo: z.string().optional(),
     nota: z.string().optional(),
   }),
 });

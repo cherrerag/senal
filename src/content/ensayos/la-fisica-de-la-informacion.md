@@ -5,7 +5,8 @@ orden: 1
 pregunta: "¿Y si el universo es, en el fondo, información?"
 fecha: 2026-06-01
 serie: "10 ideas críticas"
-coautor: "Claude"
+autor: "Claude"
+encargo: "Claudio Herrera"
 ---
 
 ## El problema de fondo

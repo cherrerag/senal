@@ -9,4 +9,6 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [auth()],
+  // En Vercel la función veía "localhost" como host; con allowedDomains Astro confía en el host real reenviado.
+  security: { allowedDomains: [{ hostname: "claudio.noisezero.dev", protocol: "https" }] },
 });

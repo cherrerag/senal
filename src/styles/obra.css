@@ -1,0 +1,39 @@
+/* Lectura de una obra de la Biblioteca (SATELITAL y las que vengan). Usa los tokens de nebulosa.css. */
+.obra-texto { max-width: 70ch; font-size: 19px; line-height: 1.7; }
+.obra-texto > p:first-child em:only-child { display: block; font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); line-height: 1.35; color: var(--fg); font-style: italic; margin-bottom: 0.6em; }
+.obra-texto h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.12; margin: 1.8em 0 0.6em; scroll-margin-top: 96px; }
+.obra-texto h3 { font-size: 23px; margin: 1.5em 0 0.4em; color: var(--accent); scroll-margin-top: 96px; }
+.obra-texto p { margin: 0 0 1.1em; color: color-mix(in srgb, var(--fg) 90%, var(--fg-2)); }
+.obra-texto a { color: var(--accent); border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.obra-texto ul, .obra-texto ol { padding-left: 1.2em; margin: 0 0 1.2em; color: var(--fg-2); }
+.obra-texto li { margin-bottom: 0.5em; }
+.obra-texto strong { font-weight: 500; color: var(--fg); }
+.obra-texto table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 1.4em 0; display: block; overflow-x: auto; }
+.obra-texto th, .obra-texto td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.obra-texto th { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-2); font-weight: 400; }
+.obra-texto hr { border: 0; border-top: 1px solid var(--line); margin: 2.4em 0; }
+.obra-texto blockquote { margin: 1.6em 0; padding: 4px 0 4px 22px; border-left: 2px solid var(--accent); }
+
+.obra-texto .fig { margin: 1.8em 0; }
+.obra-texto .fig img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); background: var(--tile); }
+.obra-texto figcaption { font-size: 14px; line-height: 1.5; color: var(--fg-2); margin-top: 10px; }
+.obra-texto .credito { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; margin-top: 4px; opacity: 0.8; }
+.obra-texto .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 1.8em 0; }
+.obra-texto .galeria .fig { margin: 0; }
+.obra-texto .galeria-pie { grid-column: 1 / -1; font-size: 15px; color: var(--fg); margin: 0; font-style: italic; }
+
+.obra-texto .recuadro { margin: 1.8em 0; padding: 18px 22px; border-radius: var(--radius); background: var(--tile); border: 1px solid var(--line); border-left: 3px solid var(--accent); backdrop-filter: blur(var(--blur)); font-size: 17px; }
+.obra-texto .recuadro.sabias { border-left-color: var(--nube-dorada); }
+.obra-texto .recuadro.hondo { border-left-color: var(--nube-turquesa); }
+.obra-texto .recuadro.aviso { border-left-color: var(--nube-magenta); }
+.obra-texto .recuadro-t { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent) !important; margin-bottom: 0.6em !important; }
+.obra-texto .recuadro.sabias .recuadro-t { color: var(--nube-dorada) !important; }
+.obra-texto .recuadro.hondo .recuadro-t { color: var(--nube-turquesa) !important; }
+.obra-texto .recuadro > :last-child { margin-bottom: 0; }
+
+.obra-texto .footnotes { margin-top: 3em; padding-top: 1.2em; border-top: 1px solid var(--line); font-size: 14px; color: var(--fg-2); }
+.obra-texto .footnotes h2 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 1em; }
+.obra-texto .footnotes p { color: var(--fg-2); margin: 0 0 0.4em; }
+.obra-texto sup a { border: 0; font-family: var(--mono); font-size: 0.7em; }
+
+@media (max-width: 900px) { .obra-texto { font-size: 18px; } }

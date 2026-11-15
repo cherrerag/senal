@@ -81,6 +81,7 @@ export const antipatrones = [
 ];
 
 export const enciclopedias = [
+  { area: "Exploración", titulo: "Más allá de nuestra altura", detalle: "Las máquinas que la humanidad envió al espacio para mirar, escuchar y llegar más lejos. 12 partes, 151 entradas y 271 imágenes, de la bala de cañón de Newton a las megaconstelaciones. Escrita e ilustrada por agentes con el método Enciclopedia.", estado: "Leer la obra", url: "/biblioteca/satelital" },
   { area: "Astrofísica", titulo: "El Universo como Sistema", detalle: "Cosmología observacional, red cósmica, astrofísica estelar y escalas. 4 tomos y 80 capítulos, con fórmulas y tablas.", estado: "En revisión: se rehace en un proyecto propio." },
   { area: "Exploración", titulo: "Misiones Espaciales y Exploración Planetaria", detalle: "De Apolo y Gemini a Artemis, pasando por la exploración robótica profunda y los observatorios en puntos de Lagrange.", estado: "Portal de lectura listo." },
   { area: "Comunicaciones", titulo: "Comunicaciones Espaciales y Redes Interplanetarias", detalle: "Telemetría, enlaces de espacio profundo y redes tolerantes a demoras. Tomo III de la serie del espacio.", estado: "En escritura." },

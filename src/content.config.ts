@@ -16,4 +16,10 @@ const ensayos = defineCollection({
   }),
 });
 
-export const collections = { ensayos };
+// Obras de la Biblioteca publicadas desde el Agente de conocimiento (motor/portal.py).
+const satelital = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/satelital" }),
+  schema: z.object({ titulo: z.string(), parte: z.string(), parte_titulo: z.string(), orden: z.number() }),
+});
+
+export const collections = { ensayos, satelital };

@@ -13,6 +13,7 @@ Pedir a Claude la **revisión de redacción del crédito**: que cada texto diga 
 - **Capturas (8 nov):** COCKPIT con textos difuminados, Cava (galería y búsqueda), Second Brain recortado solo al grafo y Music Map.
 - **Acceso privado (8 nov):** login con Google (auth-astro). Middleware que manda a `/entrar` y robots `Disallow`. Variables en Vercel: AUTH_GOOGLE_ID, AUTH_GOOGLE_SECRET, AUTH_SECRET, AUTH_TRUST_HOST, AUTH_URL. Arreglo del host «localhost» con `security.allowedDomains` (commit 368a7bb). Login probado por Claudio.
 
+- **Biblioteca: El cielo conectado (22 nov):** CIELO CONECTADO publicada en `/biblioteca/cielo_conectado` (158 entradas, 132 imágenes en `public/biblioteca/cielo_conectado/img`, área Comunicaciones). Se regenera con `python -m motor.portal cielo_conectado Comunicaciones`. Commit 33561d2.
 - **Biblioteca: Más allá de nuestra altura (15 nov):** SATELITAL publicada en `/biblioteca/satelital` (151 entradas, 239 imágenes en `public/biblioteca/satelital/img`). Se regenera desde el Agente de conocimiento con `python -m motor.portal satelital`. Vista local sin login: `VISTA_LOCAL=1 npm run dev`. Commit 48d3aac.
 
 ## Pendientes (en orden)

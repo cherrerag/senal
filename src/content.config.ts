@@ -22,4 +22,9 @@ const satelital = defineCollection({
   schema: z.object({ titulo: z.string(), parte: z.string(), parte_titulo: z.string(), orden: z.number() }),
 });
 
-export const collections = { ensayos, satelital };
+const cielo_conectado = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/cielo_conectado" }),
+  schema: z.object({ titulo: z.string(), parte: z.string(), parte_titulo: z.string(), orden: z.number() }),
+});
+
+export const collections = { ensayos, satelital, cielo_conectado };

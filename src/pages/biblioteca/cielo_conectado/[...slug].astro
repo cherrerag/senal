@@ -1,0 +1,56 @@
+---
+import Revista from "../../../layouts/Revista.astro";
+import { getCollection, render } from "astro:content";
+import "../../../styles/obra.css";
+const todas = (await getCollection("cielo_conectado")).sort((a, b) => a.data.orden - b.data.orden);
+const i = todas.findIndex((x) => x.id === Astro.params.slug);
+if (i < 0 || Astro.params.slug === "presentacion") return Astro.redirect("/biblioteca/cielo_conectado");
+const e = todas[i];
+const ant = i > 1 ? todas[i - 1] : null;
+const sig = todas[i + 1] ?? null;
+const hermanas = e.data.parte ? todas.filter((x) => x.data.parte === e.data.parte) : [];
+const { Content } = await render(e);
+const base = "/biblioteca/cielo_conectado";
+---
+<Revista title={`${e.data.titulo} · El cielo conectado`} description={e.data.parte_titulo || "El cielo conectado"}>
+  <header class="cabecera">
+    <a class="eyebrow volver" href={base}>← El cielo conectado</a>
+    {e.data.parte && <span class="eyebrow">Parte {e.data.parte} · {e.data.parte_titulo}</span>}
+    <h1>{e.data.titulo}</h1>
+  </header>
+
+  <div class="lectura">
+    {hermanas.length > 0 && (
+      <aside class="toc">
+        <span class="eyebrow">Parte {e.data.parte}</span>
+        <ol>{hermanas.map((h) => <li><a class={h.id === e.id ? "aqui" : ""} href={`${base}/${h.id}`}>{h.data.titulo}</a></li>)}</ol>
+      </aside>
+    )}
+    <article class="obra-texto"><Content /></article>
+  </div>
+
+  <nav class="pasos">
+    {ant ? <a class="vidrio" href={`${base}/${ant.id}`}><span class="eyebrow">← Anterior</span><h3>{ant.data.titulo}</h3></a> : <span />}
+    {sig && <a class="vidrio der" href={`${base}/${sig.id}`}><span class="eyebrow">Siguiente →</span><h3>{sig.data.titulo}</h3></a>}
+  </nav>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .cabecera h1 { font-size: clamp(34px, 4.4vw, 60px); line-height: 1.06; max-width: 22ch; }
+  .lectura { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 48px; }
+  .lectura:not(:has(.toc)) { grid-template-columns: minmax(0, 1fr); }
+  .toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 12px; max-height: calc(100vh - 120px); overflow-y: auto; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14px; line-height: 1.4; }
+  .toc a { color: var(--fg-2); }
+  .toc a:hover, .toc a.aqui { color: var(--accent); }
+  .pasos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pasos a { padding: 20px 22px; display: grid; gap: 6px; }
+  .pasos h3 { font-size: 20px; line-height: 1.25; }
+  .pasos .der { text-align: right; }
+  @media (max-width: 900px) {
+    .lectura { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .toc { position: static; max-height: none; }
+    .pasos { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

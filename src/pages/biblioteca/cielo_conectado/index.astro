@@ -1,0 +1,58 @@
+---
+import Revista from "../../../layouts/Revista.astro";
+import { getCollection, getEntry, render } from "astro:content";
+import "../../../styles/obra.css";
+const todas = (await getCollection("cielo_conectado")).sort((a, b) => a.data.orden - b.data.orden);
+const portada = await getEntry("cielo_conectado", "presentacion");
+const { Content } = await render(portada!);
+const partes: { id: string; titulo: string; entradas: typeof todas }[] = [];
+for (const e of todas.filter((x) => x.data.parte)) {
+  let p = partes.find((x) => x.id === e.data.parte);
+  if (!p) partes.push((p = { id: e.data.parte, titulo: e.data.parte_titulo, entradas: [] }));
+  p.entradas.push(e);
+}
+const base = "/biblioteca/cielo_conectado";
+---
+<Revista title="El cielo conectado" description="Atlas de las plataformas de comunicación satelital: sistemas, dueños, tierra e industria (2026–2035). 13 partes, 158 entradas.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/biblioteca">← Biblioteca</a>
+    <span class="eyebrow">Comunicaciones · 13 partes · {todas.filter((x) => x.data.parte).length} entradas</span>
+    <h1>El cielo conectado</h1>
+    <p class="lead">Atlas de las plataformas de comunicación satelital: sistemas, dueños, tierra e industria (2026–2035).</p>
+  </header>
+
+  <section class="sec">
+    <div class="sec-k"><span class="eyebrow">Presentación</span></div>
+    <div class="sec-c obra-texto"><Content /></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-k"><span class="num">13</span><span class="eyebrow">Partes</span></div>
+    <div class="sec-c partes">
+      {partes.map((p, i) => (
+        <details class="vidrio aparece" style={`--h:${i}`} open={i === 0}>
+          <summary><span class="mono romano">{p.id}</span><span class="pt">{p.titulo}</span><span class="mono muted n">{p.entradas.length}</span></summary>
+          <ol>{p.entradas.map((e) => <li><a href={`${base}/${e.id}`}>{e.data.titulo}</a></li>)}</ol>
+        </details>
+      ))}
+      <p class="mono extra"><a href={`${base}/como-se-hizo`}>Cómo se hizo ↗</a> · <a href={`${base}/bibliografia`}>Bibliografía ↗</a></p>
+    </div>
+  </section>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .partes { display: grid; gap: 10px; }
+  details { padding: 0; overflow: hidden; }
+  summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: baseline; padding: 18px 22px; }
+  summary::-webkit-details-marker { display: none; }
+  .romano { color: var(--accent); font-size: 14px; letter-spacing: 0.1em; }
+  .pt { font-family: var(--display); font-size: clamp(20px, 2.2vw, 26px); line-height: 1.2; }
+  .n { font-size: 12px; }
+  details ol { margin: 0; padding: 4px 22px 20px 92px; display: grid; gap: 8px; font-size: 16px; line-height: 1.4; }
+  details li::marker { color: var(--fg-2); font-family: var(--mono); font-size: 12px; }
+  details a { color: var(--fg-2); }
+  details a:hover { color: var(--accent); }
+  .extra a { color: var(--accent); }
+  @media (max-width: 600px) { summary { grid-template-columns: 40px minmax(0, 1fr) auto; padding: 16px; } details ol { padding: 4px 16px 18px 44px; } }
+</style>

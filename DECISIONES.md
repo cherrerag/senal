@@ -49,6 +49,9 @@ De «10 ideas críticas» se publican dos de las diez para partir (por definir c
 ## D-10 · Fotos (2026-11-07) ✅ cerrada
 Las fotos y videos originales viven en `_material/` (fuera de git). Las producidas (recorte, color atenuado, webp 1400/700 px) van en `public/fotos/`. Se descartan las fotos de la pantalla OLED porque muestran la red Wi-Fi y la IP.
 
+## D-12 · Método completo (2026-11-22) ✅ cerrada
+La página Método mantiene su versión breve y enlaza al final al documento completo «Seis meses construyendo con IA» en `/metodo/seis-meses`. El documento va firmado «Por Claudio Herrera» (lo escribió Claudio), a diferencia de los ensayos, firmados por Claude. Se publica tal cual salvo la línea de contenido incrustado, que se reemplazó por una lista de cuatro puntos con las mismas ideas del texto.
+
 ## Preguntas abiertas
 - Cuáles dos de las 10 ideas críticas se publican primero.
 - Dominio personal propio (más adelante).

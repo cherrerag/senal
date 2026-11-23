@@ -1,0 +1,54 @@
+---
+// Vista web del documento completo de Claudio (24 oct 2026). El texto vive en src/data/seis-meses-con-ia.md.
+import Revista from "../../layouts/Revista.astro";
+import { Content, getHeadings, frontmatter } from "../../data/seis-meses-con-ia.md";
+const secciones = getHeadings().filter((h) => h.depth === 2);
+---
+<Revista title="Seis meses construyendo con IA" description="El documento completo: origen, evolución, antipatrones y principios de seis meses dirigiendo agentes de IA como un equipo de desarrollo.">
+  <header class="cabecera">
+    <a class="eyebrow volver" href="/metodo">← Método</a>
+    <span class="eyebrow">Documento completo · 24 de octubre de 2026</span>
+    <p class="autoria mono">Por <b>Claudio Herrera</b></p>
+    <h1>{frontmatter.titulo}</h1>
+  </header>
+
+  <div class="lectura">
+    <aside class="toc">
+      <span class="eyebrow">En este documento</span>
+      <ol>{secciones.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+    </aside>
+    <article class="texto">
+      <Content />
+    </article>
+  </div>
+
+  <a class="siguiente vidrio" href="/metodo"><div><span class="eyebrow">Versión breve</span><h3>Método</h3></div><span class="boton">← Volver</span></a>
+</Revista>
+
+<style>
+  .volver { color: var(--accent); }
+  .autoria { color: var(--fg-2); font-size: 14px; }
+  .autoria b { color: var(--accent); font-weight: 500; }
+  .cabecera h1 { font-size: clamp(38px, 5.6vw, 76px); }
+  .lectura { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 48px; }
+  .toc { position: sticky; top: 96px; align-self: start; display: grid; gap: 12px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+  .toc a { color: var(--fg-2); }
+  .toc a:hover { color: var(--accent); }
+  .texto { min-width: 0; font-size: 19px; line-height: 1.7; }
+  .texto > :global(:not(table)) { max-width: 68ch; }
+  .texto :global(h2) { font-size: clamp(30px, 3.4vw, 42px); line-height: 1.1; margin: 2em 0 0.6em; scroll-margin-top: 96px; }
+  .texto :global(p) { margin: 0 0 1.1em; color: color-mix(in srgb, var(--fg) 90%, var(--fg-2)); }
+  .texto :global(ul), .texto :global(ol) { padding-left: 1.2em; margin: 0 0 1.2em; color: var(--fg-2); }
+  .texto :global(li) { margin-bottom: 0.5em; }
+  .texto :global(strong) { font-weight: 500; color: var(--fg); }
+  .texto :global(table) { display: block; overflow-x: auto; border-collapse: collapse; margin: 1.4em 0 2em; font-size: 15px; line-height: 1.5; }
+  .texto :global(th) { text-align: left; font-family: var(--mono); font-size: 12px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .texto :global(td) { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--fg-2); min-width: 9em; }
+  .texto :global(td:first-child) { color: var(--fg); }
+  @media (max-width: 900px) {
+    .lectura { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .toc { position: static; }
+    .texto { font-size: 18px; }
+  }
+</style>

@@ -52,6 +52,9 @@ Las fotos y videos originales viven en `_material/` (fuera de git). Las producid
 ## D-12 · Método completo (2026-11-22) ✅ cerrada
 La página Método mantiene su versión breve y enlaza al final al documento completo «Seis meses construyendo con IA» en `/metodo/seis-meses`. El documento va firmado «Por Claudio Herrera» (lo escribió Claudio), a diferencia de los ensayos, firmados por Claude. Se publica tal cual; la línea de contenido incrustado se reemplazó por el esquema original del sistema (PO, arquitecto, ejecutor, memoria y cierre), recreado en HTML para que se lea en móvil.
 
+## D-13 · Imágenes privadas (2026-11-22) ✅ cerrada
+Las fotos y las imágenes de la Biblioteca también exigen sesión. En Vercel los archivos de `public/` se sirven antes del middleware, así que la carpeta pública de Astro pasa a ser `estaticos/` (favicon y robots) y las imágenes se sirven desde la función con `Cache-Control: private`. Las URL no cambian. Costo: la función crece (~150 MB de 250 MB) y las imágenes ya no se cachean en la CDN.
+
 ## Preguntas abiertas
 - Cuáles dos de las 10 ideas críticas se publican primero.
 - Dominio personal propio (más adelante).

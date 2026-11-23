@@ -40,10 +40,24 @@ El método no se diseñó de una vez: lo forzaron tres quiebres. Cada uno fue un
 
 Hoy trabajo como un PO con un equipo de agentes: yo decido y verifico, la IA diseña y ejecuta, y el estado vive en archivos, no en la memoria de nadie.
 
-- **Yo, el PO:** decido qué construir y verifico que funciona.
-- **Los agentes de IA:** diseñan y ejecutan.
-- **La memoria:** vive en archivos de estado, contratos y decisiones, no en la conversación.
-- **El cierre:** cada sesión termina con un cierre asistido.
+<figure class="esquema" aria-label="El sistema de trabajo hoy: roles, memoria y cierre">
+<div class="e-caja e-po"><b>Claudio · Product Owner</b><span>Decide qué construir, define terminado, verifica</span></div>
+<div class="e-flecha" aria-hidden="true">↓</div>
+<div class="e-fila e-dos">
+<div class="e-caja"><b>Arquitecto · Claude.ai y Gemini</b><span>Diseña, escribe specs y audita</span><span>En fase de diseño no escribe código</span></div>
+<div class="e-spec" aria-hidden="true"><span class="mono">spec</span><span class="e-f">→</span></div>
+<div class="e-caja"><b>Ejecutor · Claude Code</b><span>Implementa una tarea por sesión</span><span>Verifica ejecutando antes de cerrar</span></div>
+</div>
+<div class="e-flecha e-etq"><span class="mono">leen y escriben el estado</span> ↓</div>
+<div class="e-fila e-tres">
+<div class="e-caja"><b>Repositorios</b><span>ESTADO.md: dónde estoy hoy</span><span>Contratos de datos</span><span>Decisiones registradas (ADR)</span></div>
+<div class="e-caja"><b>Second Brain</b><span>Patrones y antipatrones</span><span>Specs y conocimiento</span><span>Memoria entre proyectos</span></div>
+<div class="e-caja"><b>COCKPIT</b><span>Tareas y WIP en Supabase</span><span>Salud de proyectos</span><span>Coach de IA diario</span></div>
+</div>
+<div class="e-flecha" aria-hidden="true">↓</div>
+<div class="e-caja e-cierre"><b>Cierre de sesión asistido <span class="mono">(cierra-sesion)</span></b>
+<ol class="e-pasos"><li>build verificado</li><li>commit</li><li>ESTADO al día</li><li>tarea en DONE</li><li>aprobación del PO</li><li>push</li></ol></div>
+</figure>
 
 Cada sesión arranca leyendo el estado y termina con un cierre asistido que no deja pasar código sin verificar ni documentos desactualizados.
 

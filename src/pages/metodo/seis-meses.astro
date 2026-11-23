@@ -46,6 +46,28 @@ const secciones = getHeadings().filter((h) => h.depth === 2);
   .texto :global(th) { text-align: left; font-family: var(--mono); font-size: 12px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); padding: 10px 14px 10px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
   .texto :global(td) { padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--fg-2); min-width: 9em; }
   .texto :global(td:first-child) { color: var(--fg); }
+  .texto :global(.esquema) { margin: 1.6em 0 2em; display: grid; gap: 6px; font-size: 15px; line-height: 1.45; max-width: none; }
+  .texto :global(.e-caja) { display: grid; gap: 2px; justify-items: center; text-align: center; padding: 16px 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(14px); color: var(--fg-2); }
+  .texto :global(.e-caja b) { font-weight: 500; color: var(--fg); font-size: 16px; margin-bottom: 4px; }
+  .texto :global(.e-po) { border-color: color-mix(in srgb, var(--accent) 70%, transparent); background: color-mix(in srgb, var(--accent) 8%, transparent); max-width: 560px; justify-self: center; width: 100%; }
+  .texto :global(.e-po b) { color: var(--accent); }
+  .texto :global(.e-fila) { display: grid; gap: 10px; }
+  .texto :global(.e-dos) { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: stretch; }
+  .texto :global(.e-tres) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .texto :global(.e-spec) { display: grid; place-content: center; justify-items: center; color: var(--accent); }
+  .texto :global(.e-spec .mono) { font-size: 12px; color: var(--fg-2); }
+  .texto :global(.e-flecha) { text-align: center; color: var(--accent); font-size: 18px; line-height: 1.2; }
+  .texto :global(.e-etq .mono) { font-size: 12px; color: var(--fg-2); margin-right: 6px; }
+  .texto :global(.e-cierre) { background: rgba(255, 255, 255, 0.07); }
+  .texto :global(.e-cierre .mono) { font-size: 13px; color: var(--fg-2); font-weight: 400; }
+  .texto :global(.e-pasos) { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 4px; font-family: var(--mono); font-size: 12.5px; color: var(--fg-2); }
+  .texto :global(.e-pasos li) { margin: 0; }
+  .texto :global(.e-pasos li:not(:last-child))::after { content: " →"; color: var(--accent); }
+  @media (max-width: 640px) {
+    .texto :global(.e-dos), .texto :global(.e-tres) { grid-template-columns: minmax(0, 1fr); }
+    .texto :global(.e-spec) { grid-auto-flow: column; gap: 8px; }
+    .texto :global(.e-spec .e-f) { transform: rotate(90deg); }
+  }
   @media (max-width: 900px) {
     .lectura { grid-template-columns: minmax(0, 1fr); gap: 24px; }
     .toc { position: static; }
